@@ -7,7 +7,7 @@ public class TileLayoutAsset : ScriptableObject
 {
     public TileAssets tileAssetGroup;
     public Vector2 mapSize;
-    public List<TileTypes> tiles;
+    public TileTypes[] tiles;
 
     public List<GameObject> GetTiles()
     {
