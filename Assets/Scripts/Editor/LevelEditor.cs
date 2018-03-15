@@ -76,6 +76,8 @@ public class LevelEditor : EditorWindow
     {
         int count = 0;
 
+        EditorGUI.BeginChangeCheck();
+
         scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
         for(int y=0; y<level.mapSize.y; y++)
         {
@@ -105,6 +107,9 @@ public class LevelEditor : EditorWindow
 
         EditorGUILayout.EndScrollView();
 
+        if(EditorGUI.EndChangeCheck()){
+            EditorUtility.SetDirty(level);
+        }
     }
 
     void AdjustSize()
