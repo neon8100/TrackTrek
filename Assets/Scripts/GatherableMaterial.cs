@@ -6,7 +6,6 @@ public class GatherableMaterial : MonoBehaviour {
 
     public GameObject dropOnDesttroy;
 
-
     public int maxHealth;
 
     int currentHealth;
@@ -33,8 +32,8 @@ public class GatherableMaterial : MonoBehaviour {
 
     void Pop()
     {
-        transform.localScale = new Vector3(0.2f, 0.2f);
-        LeanTween.scale(gameObject, new Vector3(0.22f, 0.22f), 0.1f).setLoopPingPong(1);
+        transform.localScale = new Vector3(1f,1f);
+        LeanTween.scale(gameObject, new Vector3(1.1f, 1.1f), 0.1f).setLoopPingPong(1);
     }
 
     public void OnDestroy()

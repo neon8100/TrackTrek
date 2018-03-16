@@ -13,16 +13,15 @@ public class PlayerController : MonoBehaviour {
 
     public PlayerID playerNumber;
     int playerId;
-    public float lookAheadSpeed;
-    public float playerSpeed;
+    //public float lookAheadSpeed;
+    //public float playerSpeed;
 
-    Transform lookTarget;
+    public float speed;
+
+    public Transform lookPointer;
 
     private void Awake()
     {
-        GameObject t = new GameObject();
-        t.transform.position = transform.position;
-        lookTarget = t.transform;
 
         playerId = (int)playerNumber + 1;
 
@@ -31,12 +30,12 @@ public class PlayerController : MonoBehaviour {
             Debug.Log(s);
         }
 
-
         onActionButtonDown = new UnityEvent();
         onActionButtonUp = new UnityEvent();
         onActionButtonStay = new UnityEvent();
 
         onActionButtonDown.AddListener(CheckActionInputs);
+
 
     }
 
@@ -46,20 +45,38 @@ public class PlayerController : MonoBehaviour {
         float vertical = Input.GetAxis("VerticalP"+playerId);
         float horizontal = Input.GetAxis("HorizontalP"+playerId);
 
-        Vector2 pos = new Vector2(lookTarget.position.x, lookTarget.position.y);
-        Vector2 newPos = pos + new Vector2(horizontal * lookAheadSpeed, vertical * lookAheadSpeed);
+        Vector3 pos = new Vector3(transform.position.x, transform.position.y);
+        Vector3 newPos = pos + new Vector3(horizontal * speed, vertical * speed);
 
-        lookTarget.position = newPos;
-
-        Vector3 vectorToTarget = lookTarget.position - transform.position;
-        float angle = (Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg)- 90;
+        Vector3 vectorToTarget = newPos - transform.position;
+        float angle = (Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg) - 90;
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
 
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, q, 10);
-        transform.position = Vector3.Lerp(transform.position, lookTarget.position, playerSpeed);
+        if (Mathf.Abs(vertical) >= 0.5 || Mathf.Abs(horizontal) >= 0.5f)
+        {
+            transform.rotation = q;
+        }
 
+        transform.position = Vector3.Lerp(transform.position, newPos, Time.deltaTime);
 
+        if (trackGhost != null)
+        {
+            trackGhost.transform.position = new Vector3(Mathf.Round(lookPointer.position.x), Mathf.Round(lookPointer.position.y));
+        }
 
+        if (contextButton && holdingMaterial)
+        {
+            PlaceTrack();
+        }
+
+        if (leftBumper)
+        {
+            SwapTrackGhost(-1);
+        }
+        else if (rightBumper)
+        {
+            SwapTrackGhost(1);
+        }
     }
 
     private void LateUpdate()
@@ -100,6 +117,7 @@ public class PlayerController : MonoBehaviour {
     public Collision2D collision;
     public CollectableMaterial material;
 
+
     void HandleMaterialCollision(CollectableMaterial material)
     {
         if (actionButton > 0 && this.material!=material)
@@ -107,6 +125,7 @@ public class PlayerController : MonoBehaviour {
             material.Hold(gameObject);
             this.material = material;
             holdingMaterial = true;
+            CreateTrackGhost();
             
         }
     }
@@ -125,6 +144,11 @@ public class PlayerController : MonoBehaviour {
             material.Drop();
             holdingMaterial = false;
             this.material = null;
+
+            if (trackGhost != null)
+            {
+                Destroy(trackGhost);
+            }
         }
         else
         {
@@ -141,22 +165,52 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    /*
-    void CheckButtonPresses()
-    {
-        if (actionButton>0 && !actionButtonIsDown)
-        {
-            onActionButtonDown.Invoke();
-            
-        }
-    }
-    */
 
     float actionButton { get { return Input.GetAxis("FireP" + playerId); } }
+    bool contextButton { get { return Input.GetButtonDown("ContextP" + playerId); } }
+    bool leftBumper { get { return Input.GetButtonDown("LBumpP"+playerId); } }
+    bool rightBumper { get { return Input.GetButtonDown("RBumpP" + playerId); } }
 
     bool actionButtonIsDown;
 
     UnityEvent onActionButtonDown;
     UnityEvent onActionButtonStay;
     UnityEvent onActionButtonUp;
+
+    public TrackAssets trackAssets;
+    GameObject trackGhost;
+    int trackIndex = 0;
+
+    void CreateTrackGhost()
+    {
+        trackGhost = Instantiate(trackAssets.trackTypes[trackIndex]);
+        trackGhost.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.25f);
+
+    }
+
+    void SwapTrackGhost(int direction)
+    {
+        trackIndex += direction;
+
+        if (trackIndex > trackAssets.trackTypes.Count - 1)
+        {
+            trackIndex = 0;
+        }
+        else if (trackIndex < 0)
+        {
+            trackIndex = trackAssets.trackTypes.Count - 1;
+        }
+
+        Destroy(trackGhost);
+        CreateTrackGhost();
+    }
+
+    void PlaceTrack()
+    {
+        trackGhost.GetComponent<SpriteRenderer>().color = Color.white;
+        trackGhost = null;
+        Destroy(material.gameObject);
+        this.material = null;
+        holdingMaterial = false;
+    }
 }

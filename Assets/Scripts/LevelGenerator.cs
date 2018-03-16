@@ -9,12 +9,31 @@ public class LevelGenerator : MonoBehaviour {
     public GameObject player1;
     public GameObject player2;
 
+    PolygonCollider2D bounds;
+
+    public Cinemachine.CinemachineConfiner confiner;
+
     public void Awake()
     {
         GenerateLevel();
+
+        bounds = map.AddComponent<PolygonCollider2D>();
     }
 
+    private void Start()
+    {
+        Vector2[] b = new Vector2[4];
+        b[0] = new Vector2(0, 0);
+        b[1] = new Vector2(0, -levelLayout.mapSize.y);
+        b[2] = new Vector2(levelLayout.mapSize.x, -levelLayout.mapSize.y);
+        b[3] = new Vector2(levelLayout.mapSize.x, 0);
 
+        bounds.points = b;
+        bounds.isTrigger = true;
+
+        confiner.m_BoundingShape2D = bounds;
+    }
+    
     GameObject map;
     void GenerateLevel()
     {
@@ -42,7 +61,6 @@ public class LevelGenerator : MonoBehaviour {
 
     void AddTileToLevel(Vector2 pos, GameObject tile)
     {
-
         GameObject t = GameObject.Instantiate(tile);
         t.name = pos.ToString();
         t.transform.SetParent(map.transform);
