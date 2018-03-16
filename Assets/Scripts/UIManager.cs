@@ -104,7 +104,6 @@ public class UIManager : MonoBehaviour {
     public void RunPauseGameEvents()
     {
         GameEvents.events.onGamePause();
-        showPausePanel = false;
         print("Pause Game");
     }
 
