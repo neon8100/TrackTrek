@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (CrossPlatformInputManager.GetButtonUp("Jump"))
+        if (CrossPlatformInputManager.GetButtonDown("Jump"))
         {
             if(isGamePaused){
                 shouldGameBePaused = false;

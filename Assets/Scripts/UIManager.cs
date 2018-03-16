@@ -34,7 +34,7 @@ public class UIManager : MonoBehaviour {
 	void Update () {
         print("show pause panel is "+showPausePanel);
 
-        pausePanel.SetActive(showPausePanel);
+
 
         if (showTitlePanel)
         {
@@ -61,9 +61,15 @@ public class UIManager : MonoBehaviour {
 	}
 
     public void ShowPauseGameMenu(){
+
         if(!pausePanel.activeInHierarchy){
             showPausePanel = true;
-        } 
+        } else if (pausePanel.activeInHierarchy)
+        {
+            showPausePanel = false;
+        }
+
+        pausePanel.SetActive(showPausePanel);
     }
 
     private void ShowGameOverPanel()
