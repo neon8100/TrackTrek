@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour {
 
+    public static LevelGenerator instance;
+
     public TileLayoutAsset levelLayout;
 
     public GameObject player1;
@@ -13,11 +15,14 @@ public class LevelGenerator : MonoBehaviour {
 
     public Cinemachine.CinemachineConfiner confiner;
 
+    public List<TrackPiece> tracks;
+
     public void Awake()
     {
         GenerateLevel();
 
         bounds = map.AddComponent<PolygonCollider2D>();
+        instance = this;
     }
 
     private void Start()
@@ -35,6 +40,7 @@ public class LevelGenerator : MonoBehaviour {
     }
     
     GameObject map;
+
     void GenerateLevel()
     {
         map = new GameObject("Map");
@@ -67,5 +73,9 @@ public class LevelGenerator : MonoBehaviour {
         t.transform.position = pos;
 
     }
+
+
+
+
 
 }

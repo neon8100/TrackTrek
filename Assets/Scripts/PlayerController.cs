@@ -208,9 +208,15 @@ public class PlayerController : MonoBehaviour {
     void PlaceTrack()
     {
         trackGhost.GetComponent<SpriteRenderer>().color = Color.white;
+
+        LevelGenerator.instance.tracks.Add(trackGhost.GetComponent<TrackPiece>());
+
         trackGhost = null;
+
         Destroy(material.gameObject);
+
         this.material = null;
+
         holdingMaterial = false;
     }
 }
