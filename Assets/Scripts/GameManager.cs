@@ -29,6 +29,11 @@ public class GameManager : MonoBehaviour {
 	void Update () {
         print(Time.timeScale);
         print("Game is paused: "+isGamePaused);
+
+        if (CrossPlatformInputManager.GetButtonDown("Jump"))
+        {
+            GameEvents.events.onUIOpenTrackSelect();
+        } 
 	}
 
 	private void FixedUpdate()
