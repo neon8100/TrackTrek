@@ -5,6 +5,7 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class UIManager : MonoBehaviour {
 
+    [SerializeField]
     private GameManager gameManager;
 
     private bool showPausePanel;
@@ -31,15 +32,14 @@ public class UIManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        print("show pause panel is "+showPausePanel);
+
+        pausePanel.SetActive(showPausePanel);
+
         if (showTitlePanel)
         {
             ShowTitlePanel();
             showTitlePanel = false;
-        }
-
-        if(showPausePanel){
-            ShowPauseGameMenu();
-            showPausePanel = false;
         }
 
         if (showGameOverPanel)
@@ -51,11 +51,6 @@ public class UIManager : MonoBehaviour {
 
 	private void FixedUpdate()
 	{
-        if (CrossPlatformInputManager.GetButtonDown("Jump") && !titleMenuPanel.activeInHierarchy && !gameOverPanel.activeInHierarchy)
-        {
-            GameEvents.events.onGamePause();
-        } 
-
         if(CrossPlatformInputManager.GetButtonDown("Fire2")){
             showTitlePanel = true;
         }
@@ -65,16 +60,10 @@ public class UIManager : MonoBehaviour {
         }
 	}
 
-    //Currently only activates the Pause Panel
     public void ShowPauseGameMenu(){
         if(!pausePanel.activeInHierarchy){
-            pausePanel.SetActive(true);
-        } else if (pausePanel.activeInHierarchy){
-            pausePanel.SetActive(false);
-            titleMenuPanel.SetActive(false);
-            gameOverPanel.SetActive(false);
-        }
-
+            showPausePanel = true;
+        } 
     }
 
     private void ShowGameOverPanel()
@@ -115,6 +104,7 @@ public class UIManager : MonoBehaviour {
     public void RunPauseGameEvents()
     {
         GameEvents.events.onGamePause();
+        showPausePanel = false;
         print("Pause Game");
     }
 
