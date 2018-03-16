@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour {
     private void Awake()
     {
         GameObject t = new GameObject();
+        t.transform.position = transform.position;
         lookTarget = t.transform;
 
         playerId = (int)playerNumber + 1;
@@ -37,8 +38,6 @@ public class PlayerController : MonoBehaviour {
 
         onActionButtonDown.AddListener(CheckActionInputs);
 
-
-
     }
 
     private void Update()
@@ -52,10 +51,15 @@ public class PlayerController : MonoBehaviour {
 
         lookTarget.position = newPos;
 
-        transform.up = lookTarget.position;
+        Vector3 vectorToTarget = lookTarget.position - transform.position;
+        float angle = (Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg)- 90;
+        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, q, 10);
         transform.position = Vector3.Lerp(transform.position, lookTarget.position, playerSpeed);
 
-        
+
+
     }
 
     private void LateUpdate()
@@ -106,6 +110,13 @@ public class PlayerController : MonoBehaviour {
             
         }
     }
+    void HandleDestructableCollision(GatherableMaterial gatherable)
+    {
+        if (actionButton > 0)
+        {
+            gatherable.Damage();
+        }
+    }
 
     void CheckActionInputs()
     {
@@ -117,10 +128,15 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
-            if (collision.gameObject.GetComponent<CollectableMaterial>())
+            if(collision == null) { return; }
+            if (collision.gameObject.GetComponent<CollectableMaterial>() != null)
             {
                 //Handles a collision against a material object
                 HandleMaterialCollision(collision.gameObject.GetComponent<CollectableMaterial>());
+            }
+            else if (collision.gameObject.GetComponent<GatherableMaterial>() !=null)
+            {
+                HandleDestructableCollision(collision.gameObject.GetComponent<GatherableMaterial>());
             }
         }
     }

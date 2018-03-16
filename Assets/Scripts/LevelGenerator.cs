@@ -6,8 +6,10 @@ public class LevelGenerator : MonoBehaviour {
 
     public TileLayoutAsset levelLayout;
 
+    public GameObject player1;
+    public GameObject player2;
 
-    public void Start()
+    public void Awake()
     {
         GenerateLevel();
     }
@@ -32,7 +34,9 @@ public class LevelGenerator : MonoBehaviour {
                 count++;
             }
         }
-        
+
+        player1.transform.position = new Vector3(levelLayout.mapSize.x/ 2, -levelLayout.mapSize.y / 2);
+        player2.transform.position = player1.transform.position + new Vector3(2, 2, 0);
 
     }
 
