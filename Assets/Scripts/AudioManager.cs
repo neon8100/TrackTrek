@@ -25,7 +25,9 @@ public class AudioManager : MonoBehaviour {
         GameEvents.events.onUIChooseTrack += PlayOnUIChooseTrack;
         GameEvents.events.onGameWin += PlayWin;
         GameEvents.events.onGameLose += PlayLose;
-
+        GameEvents.events.onResourceCreated += PlayGenerateResource;
+        GameEvents.events.onLayTrack += PlayLayTrack;
+        GameEvents.events.onUIOpenTrackSelect += PlayOnUITrackTypeSelect;
 
         //The game will start playing the ambience and music at the start and loop until you quit
         PlayAmbient();
@@ -60,6 +62,12 @@ public class AudioManager : MonoBehaviour {
         audioSource[0].Play();
     }
 
+    private void PlayGenerateResource()
+    {
+        audioSource[0].clip = audioAssets.GetAudioClip(AudioClipTypes.TreeFall);
+        audioSource[0].Play();
+    }
+
     private void PlayCraftTrack(){
         audioSource[0].clip = audioAssets.GetAudioClip(AudioClipTypes.CraftTrack);
         audioSource[0].Play();
@@ -89,6 +97,12 @@ public class AudioManager : MonoBehaviour {
         audioSource[0].Play();
     }
 
+    private void PlayOnUITrackTypeSelect()
+    {
+        audioSource[0].clip = audioAssets.GetAudioClip(AudioClipTypes.SelectTypeUI);
+        audioSource[0].Play();
+    }
+
     private void PlayWin()
     {
         audioSource[0].clip = audioAssets.GetAudioClip(AudioClipTypes.Win);
@@ -99,6 +113,11 @@ public class AudioManager : MonoBehaviour {
     {
         audioSource[0].clip = audioAssets.GetAudioClip(AudioClipTypes.Lose);
         audioSource[0].Play();
+    }
+
+    private void OnDestroy()
+    {
+       
     }
 
 }
