@@ -7,8 +7,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
 
     private bool isGamePaused;
+    private bool shouldGameBePaused;
 
     public bool IsGamePaused { get; private set; } 
+    public bool ShouldGameBePaused { get; private set; }
 
 	private void Awake()
 	{
@@ -22,17 +24,22 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        //GameEvents.events.onGamePause += PauseGame;
         GameEvents.events.onGamePause += SetTimeScale;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        print(Time.timeScale);
-        print("Game is paused: "+isGamePaused);
 
-        if (CrossPlatformInputManager.GetButtonDown("Jump"))
+        if (CrossPlatformInputManager.GetButtonUp("Jump"))
         {
-            GameEvents.events.onUIOpenTrackSelect();
+            if(isGamePaused){
+                shouldGameBePaused = false;
+            } else if (!isGamePaused){
+                shouldGameBePaused = true;
+            }
+
+            GameEvents.events.onGamePause();
         } 
 	}
 
@@ -49,20 +56,19 @@ public class GameManager : MonoBehaviour {
         GameEvents.events.onGameStart();
     }
 
-    public void PauseGame()
+    /*public void PauseGame()
     {
-        GameEvents.events.onGamePause();
-    }
+        isGamePaused = true;
+    }*/
 
     public void SetTimeScale(){
-        if (!isGamePaused) { isGamePaused = true; }
-        else if (isGamePaused) { isGamePaused = false; }
-
-        if(isGamePaused){
+        if(shouldGameBePaused){
             Time.timeScale = 0f;
+            isGamePaused = true;
             print("Stopped time");
-        } else {
+        } else if(!shouldGameBePaused){
             Time.timeScale = 1f;
+            isGamePaused = false;
             print("Unstopped time");
         }
     }

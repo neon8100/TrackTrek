@@ -8,10 +8,19 @@ public class AudioManager : MonoBehaviour {
 
     private AudioSource[] audioSource;
     private AudioClip audioClip;
+    private AudioSource player1AudioSource;
+    private AudioSource player2AudioSource;
+    private AudioSource musicAudioSource;
+    private AudioSource ambientAudioSource;
 
 	private void Awake()
 	{
         audioSource = GetComponents<AudioSource>();
+
+        player1AudioSource = audioSource[0];
+        player2AudioSource = audioSource[3];
+        musicAudioSource = audioSource[2];
+        ambientAudioSource = audioSource[1];
 	}
 
 	// Use this for initialization
@@ -28,6 +37,7 @@ public class AudioManager : MonoBehaviour {
         GameEvents.events.onResourceCreated += PlayGenerateResource;
         GameEvents.events.onLayTrack += PlayLayTrack;
         GameEvents.events.onUIOpenTrackSelect += PlayOnUITrackTypeSelect;
+        GameEvents.events.onGamePause += PlayOnUITrackTypeSelect;
 
         //The game will start playing the ambience and music at the start and loop until you quit
         PlayAmbient();
@@ -35,15 +45,15 @@ public class AudioManager : MonoBehaviour {
 	}
 	
     private void PlayAmbient(){
-        audioSource[1].clip = audioAssets.GetAudioClip(AudioClipTypes.Ambience);
-        audioSource[1].Play();
-        audioSource[1].loop = true;
+        ambientAudioSource.clip = audioAssets.GetAudioClip(AudioClipTypes.Ambience);
+        ambientAudioSource.Play();
+        ambientAudioSource.loop = true;
     }
 
     private void PlayMusic(){
-        audioSource[2].clip = audioAssets.GetAudioClip(AudioClipTypes.Music);
-        audioSource[2].Play();
-        audioSource[2].loop = true;
+        musicAudioSource.clip = audioAssets.GetAudioClip(AudioClipTypes.Music);
+        musicAudioSource.Play();
+        musicAudioSource.loop = true;
     }
 
     private void PlayPickupResource(){
@@ -117,7 +127,18 @@ public class AudioManager : MonoBehaviour {
 
     private void OnDestroy()
     {
-       
+        GameEvents.events.onPickupResource -= PlayPickupResource;
+        GameEvents.events.onDropItem -= PlayDropResource;
+        GameEvents.events.onInteractResource -= PlayInteractWithResource;
+        GameEvents.events.onCraftTrack -= PlayCraftTrack;
+        GameEvents.events.onDeleteTrack -= PlayDeleteTrack;
+        GameEvents.events.onTrainAboutToCrash -= PlayTrainAboutToCrash;
+        GameEvents.events.onUIChooseTrack -= PlayOnUIChooseTrack;
+        GameEvents.events.onGameWin -= PlayWin;
+        GameEvents.events.onGameLose -= PlayLose;
+        GameEvents.events.onResourceCreated -= PlayGenerateResource;
+        GameEvents.events.onLayTrack -= PlayLayTrack;
+        GameEvents.events.onUIOpenTrackSelect -= PlayOnUITrackTypeSelect;
     }
 
 }
