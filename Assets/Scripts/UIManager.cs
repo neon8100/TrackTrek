@@ -5,11 +5,12 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class UIManager : MonoBehaviour {
 
-    public GameManager gameManager;
+    private GameManager gameManager;
 
     private bool showPausePanel;
     private bool showTitlePanel;
     private bool showGameOverPanel;
+    private bool pressPauseWhilePaused;
 
     [SerializeField]
     private GameObject titleMenuPanel;
@@ -24,6 +25,8 @@ public class UIManager : MonoBehaviour {
         GameEvents.events.onGameStart += ShowTitlePanel;
         GameEvents.events.onGameOver += ShowGameOverPanel;
         GameEvents.events.onGamePause += ShowPauseGameMenu;
+
+        GameObject.FindGameObjectWithTag("GameManager");
 	}
 	
 	// Update is called once per frame
@@ -44,9 +47,6 @@ public class UIManager : MonoBehaviour {
             ShowGameOverPanel();
             showGameOverPanel = false;
         }
-
-
-
 	}
 
 	private void FixedUpdate()
@@ -105,6 +105,29 @@ public class UIManager : MonoBehaviour {
             pausePanel.SetActive(false);
             gameOverPanel.SetActive(false);
         }
+    }
+
+    public void RunStartGameEvent(){
+        GameEvents.events.onGameStart();
+        print("Start Game");
+    }
+
+    public void RunPauseGameEvents()
+    {
+        GameEvents.events.onGamePause();
+        print("Pause Game");
+    }
+
+    public void RunGameOverEvents()
+    {
+        GameEvents.events.onGameOver();
+        print("Restart Game/Game Over");
+    }
+
+    public void RunQuitGame()
+    {
+        print("Quit");
+        gameManager.QuitGame();
     }
 
 	private void OnDestroy()
