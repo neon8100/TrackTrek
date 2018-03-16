@@ -1684,6 +1684,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da855a3bd3a3447b3bc5c6ef4d1d93d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  logoPanel: {fileID: 1945952815}
   titleMenuPanel: {fileID: 1762410370}
   pausePanel: {fileID: 77048367}
   gameOverPanel: {fileID: 682535998}

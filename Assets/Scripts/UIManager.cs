@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour {
     private bool pressPauseWhilePaused;
 
     [SerializeField]
+    private GameObject logoPanel;
+    [SerializeField]
     private GameObject titleMenuPanel;
     [SerializeField]
     private GameObject pausePanel;
@@ -70,6 +72,7 @@ public class UIManager : MonoBehaviour {
         }
 
         pausePanel.SetActive(showPausePanel);
+        logoPanel.SetActive(showPausePanel);
     }
 
     private void ShowGameOverPanel()
@@ -79,10 +82,12 @@ public class UIManager : MonoBehaviour {
             gameOverPanel.SetActive(true);
             pausePanel.SetActive(false);
             titleMenuPanel.SetActive(false);
+            logoPanel.SetActive(true);
         } else if (gameOverPanel.activeInHierarchy){
             gameOverPanel.SetActive(false);
             pausePanel.SetActive(false);
             titleMenuPanel.SetActive(false);
+            logoPanel.SetActive(false);
         }
     }
 
@@ -93,12 +98,14 @@ public class UIManager : MonoBehaviour {
             titleMenuPanel.SetActive(true);
             pausePanel.SetActive(false);
             gameOverPanel.SetActive(false);
+            logoPanel.SetActive(true);
         }
         else if (titleMenuPanel.activeInHierarchy)
         {
             titleMenuPanel.SetActive(false);
             pausePanel.SetActive(false);
             gameOverPanel.SetActive(false);
+            logoPanel.SetActive(false);
         }
     }
 

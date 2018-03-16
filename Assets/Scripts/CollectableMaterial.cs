@@ -9,6 +9,7 @@ public class CollectableMaterial : MonoBehaviour
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        GameEvents.events.onResourceCreated();
     }
 
     GameObject parent;
@@ -18,12 +19,14 @@ public class CollectableMaterial : MonoBehaviour
 
         body.simulated = false;
         parent = character;
+        GameEvents.events.onPickupResource();
     }
 
     public void Drop()
     {
         body.simulated = true;
         parent = null;
+        GameEvents.events.onDropItem();
     }
 
     public void Update()

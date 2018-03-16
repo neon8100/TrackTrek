@@ -185,7 +185,7 @@ public class PlayerController : MonoBehaviour {
     {
         trackGhost = Instantiate(trackAssets.trackTypes[trackIndex]);
         trackGhost.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.25f);
-
+        GameEvents.events.onUIChooseTrack();
     }
 
     void SwapTrackGhost(int direction)
@@ -218,5 +218,7 @@ public class PlayerController : MonoBehaviour {
         this.material = null;
 
         holdingMaterial = false;
+
+        GameEvents.events.onLayTrack();
     }
 }
