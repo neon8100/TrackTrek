@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class TrainController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public float speed = 1f;
+
+    public void Update()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.right, speed);
+    }
+
+
+    public void OnDestroy()
+    {
+        //GameEvents.events.
+    }
 }
