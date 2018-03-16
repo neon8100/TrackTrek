@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void StartGame(){
-        
+        GameEvents.events.onGameStart();
     }
 
     public void ResetGame(){
