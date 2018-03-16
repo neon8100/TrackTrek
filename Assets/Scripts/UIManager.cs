@@ -51,7 +51,7 @@ public class UIManager : MonoBehaviour {
 
 	private void FixedUpdate()
 	{
-        if (CrossPlatformInputManager.GetButtonDown("Jump"))
+        if (CrossPlatformInputManager.GetButtonDown("Jump") && !titleMenuPanel.activeInHierarchy && !gameOverPanel.activeInHierarchy)
         {
             GameEvents.events.onGamePause();
         } 
@@ -67,7 +67,7 @@ public class UIManager : MonoBehaviour {
 
     //Currently only activates the Pause Panel
     public void ShowPauseGameMenu(){
-        if(!pausePanel.activeInHierarchy && !titleMenuPanel.activeInHierarchy && !gameOverPanel.activeInHierarchy){
+        if(!pausePanel.activeInHierarchy){
             pausePanel.SetActive(true);
         } else if (pausePanel.activeInHierarchy){
             pausePanel.SetActive(false);
