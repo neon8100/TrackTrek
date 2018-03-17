@@ -26,17 +26,17 @@ public class GameEvents
     public delegate void OnGameLose();
     public delegate void OnGameRestart();
 
-    public delegate void OnPickupResource();
-    public delegate void OnDropResource();
+    public delegate void OnPickupResource(PlayerController player);
+    public delegate void OnDropResource(PlayerController player);
     public delegate void OnInteractResource();
     public delegate void OnResourceCreated();
     public delegate void OnDropItem();
-    public delegate void OnCraftTrack();
-    public delegate void OnDeleteTrack();
-    public delegate void OnLayTrack();
-    public delegate void OnTrainAboutToCrash();
+    public delegate void OnCraftTrack(PlayerController player);
+    public delegate void OnDeleteTrack(PlayerController player);
+    public delegate void OnLayTrack(PlayerController player);
+    public delegate void OnTrainAboutToCrash(PlayerController player);
 
-    public delegate void OnUIChooseTrack();
+    public delegate void OnUIChooseTrack(PlayerController player);
     public delegate void OnUIOpenTrackSelect();
 
     //Add a variable of the delegate type to be listened to when calling events.
@@ -73,17 +73,17 @@ public class GameEvents
         onGameWin += () => { };
         onGameLose += () => { };
 
-        onPickupResource += () => { };
-        onDropResource += () => { };
+        onPickupResource += (x) => { };
+        onDropResource += (x) => { };
         onInteractResource += () => { };
         onResourceCreated += () => { };
         onDropItem += () => { };
-        onCraftTrack += () => { };
-        onDeleteTrack += () => { };
-        onLayTrack += () => { };
-        onTrainAboutToCrash += () => { };
+        onCraftTrack += (x) => { };
+        onDeleteTrack += (x) => { };
+        onLayTrack += (x) => { };
+        onTrainAboutToCrash += (x) => { };
 
-        onUIChooseTrack += () => { };
+        onUIChooseTrack += (x) => { };
         onUIOpenTrackSelect += () => { };
 
     }

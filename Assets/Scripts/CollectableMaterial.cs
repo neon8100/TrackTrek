@@ -21,7 +21,7 @@ public class CollectableMaterial : MonoBehaviour
 
         body.simulated = false;
         parent = character;
-        GameEvents.events.onPickupResource();
+        GameEvents.events.onPickupResource(character.GetComponent<PlayerController>());
     }
 
     public void Drop()

@@ -12,15 +12,17 @@ public class AudioManager : MonoBehaviour {
     private AudioSource player2AudioSource;
     private AudioSource musicAudioSource;
     private AudioSource ambientAudioSource;
+    private AudioSource nonPlayerSFXSource;
 
 	private void Awake()
 	{
         audioSource = GetComponents<AudioSource>();
 
         player1AudioSource = audioSource[0];
-        player2AudioSource = audioSource[3];
+        player2AudioSource = audioSource[1];
         musicAudioSource = audioSource[2];
-        ambientAudioSource = audioSource[1];
+        ambientAudioSource = audioSource[3];
+        nonPlayerSFXSource = audioSource[4];
 	}
 
 	// Use this for initialization
@@ -65,73 +67,73 @@ public class AudioManager : MonoBehaviour {
         musicAudioSource.Stop();
     }
 
-    private void PlayPickupResource(){
-        audioSource[0].clip = audioAssets.GetAudioClip(AudioClipTypes.PickUpItem);
-        audioSource[0].Play();
+    private void PlayPickupResource(PlayerController player){
+        audioSource[(int)player.playerNumber].clip = audioAssets.GetAudioClip(AudioClipTypes.PickUpItem);
+        audioSource[(int)player.playerNumber].Play();
     }
 
     private void PlayDropResource(){
-        audioSource[0].clip = audioAssets.GetAudioClip(AudioClipTypes.DropItem);
-        audioSource[0].Play();
+        audioSource[4].clip = audioAssets.GetAudioClip(AudioClipTypes.DropItem);
+        audioSource[4].Play();
     }
 
     private void PlayInteractWithResource(){
         //Only plays mine sound right now
-        audioSource[0].clip = audioAssets.GetAudioClip(AudioClipTypes.MineChop);
-        audioSource[0].Play();
+        audioSource[4].clip = audioAssets.GetAudioClip(AudioClipTypes.TreeChop);
+        audioSource[4].Play();
     }
 
     private void PlayGenerateResource()
     {
-        audioSource[0].clip = audioAssets.GetAudioClip(AudioClipTypes.TreeFall);
-        audioSource[0].Play();
+        audioSource[4].clip = audioAssets.GetAudioClip(AudioClipTypes.TreeFall);
+        audioSource[4].Play();
     }
 
-    private void PlayCraftTrack(){
-        audioSource[0].clip = audioAssets.GetAudioClip(AudioClipTypes.CraftTrack);
-        audioSource[0].Play();
+    private void PlayCraftTrack(PlayerController player){
+        audioSource[(int)player.playerNumber].clip = audioAssets.GetAudioClip(AudioClipTypes.CraftTrack);
+        audioSource[(int)player.playerNumber].Play();
     }
 
-    private void PlayDeleteTrack()
+    private void PlayDeleteTrack(PlayerController player)
     {
-        audioSource[0].clip = audioAssets.GetAudioClip(AudioClipTypes.DeleteTrack);
-        audioSource[0].Play();
+        audioSource[(int)player.playerNumber].clip = audioAssets.GetAudioClip(AudioClipTypes.DeleteTrack);
+        audioSource[(int)player.playerNumber].Play();
     }
 
-    private void PlayLayTrack()
+    private void PlayLayTrack(PlayerController player)
     {
-        audioSource[0].clip = audioAssets.GetAudioClip(AudioClipTypes.LayTrack);
-        audioSource[0].Play();
+        audioSource[(int)player.playerNumber].clip = audioAssets.GetAudioClip(AudioClipTypes.LayTrack);
+        audioSource[(int)player.playerNumber].Play();
     }
 
-    private void PlayTrainAboutToCrash()
+    private void PlayTrainAboutToCrash(PlayerController player)
     {
-        audioSource[0].clip = audioAssets.GetAudioClip(AudioClipTypes.TrainAboutToCrash);
-        audioSource[0].Play();
+        audioSource[(int)player.playerNumber].clip = audioAssets.GetAudioClip(AudioClipTypes.TrainAboutToCrash);
+        audioSource[(int)player.playerNumber].Play();
     }
 
-    private void PlayOnUIChooseTrack()
+    private void PlayOnUIChooseTrack(PlayerController player)
     {
-        audioSource[0].clip = audioAssets.GetAudioClip(AudioClipTypes.ChooseTrackType);
-        audioSource[0].Play();
+        audioSource[(int)player.playerNumber].clip = audioAssets.GetAudioClip(AudioClipTypes.ChooseTrackType);
+        audioSource[(int)player.playerNumber].Play();
     }
 
     private void PlayOnUITrackTypeSelect()
     {
-        audioSource[0].clip = audioAssets.GetAudioClip(AudioClipTypes.SelectTypeUI);
-        audioSource[0].Play();
+        audioSource[4].clip = audioAssets.GetAudioClip(AudioClipTypes.SelectTypeUI);
+        audioSource[4].Play();
     }
 
     private void PlayWin()
     {
-        audioSource[0].clip = audioAssets.GetAudioClip(AudioClipTypes.Win);
-        audioSource[0].Play();
+        audioSource[4].clip = audioAssets.GetAudioClip(AudioClipTypes.Win);
+        audioSource[4].Play();
     }
 
     private void PlayLose()
     {
-        audioSource[0].clip = audioAssets.GetAudioClip(AudioClipTypes.Lose);
-        audioSource[0].Play();
+        audioSource[4].clip = audioAssets.GetAudioClip(AudioClipTypes.Lose);
+        audioSource[4].Play();
     }
 
     private void OnDestroy()
