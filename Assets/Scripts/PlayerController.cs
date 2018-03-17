@@ -107,11 +107,11 @@ public class PlayerController : MonoBehaviour {
             PlaceTrack();
         }
 
-        if (leftBumper)
+        if (leftBumper && holdingMaterial)
         {
             SwapTrackGhost(-1);
         }
-        else if (rightBumper)
+        else if (rightBumper && holdingMaterial)
         {
             SwapTrackGhost(1);
         }
@@ -286,8 +286,17 @@ public class PlayerController : MonoBehaviour {
 
     void PlaceTrack()
     {
+
+        if (lookPointer.gameObject.GetComponent<PointerAnimator>().unbuildable)
+        {
+            return;
+        }
+
+
         trackGhost.GetComponent<SpriteRenderer>().color = Color.white;
         trackGhost.GetComponent<TrackPiece>().boxCollider.enabled = true;
+
+
         trackGhost = null;
 
         Destroy(material.gameObject);

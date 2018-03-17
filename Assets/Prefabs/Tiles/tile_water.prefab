@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114012840425463684}
   m_Layer: 0
   m_Name: tile_water
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,6 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd5d8493e9b57234ab40a484b66d2fe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animLock: 0
+  completedOnce: 0
   framesPerSecond: 5
   sprites:
   - {fileID: 21300000, guid: ab2eb3e7e94184244bfdc5a8bd6ed1cc, type: 3}
