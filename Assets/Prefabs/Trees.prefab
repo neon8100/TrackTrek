@@ -9,66 +9,45 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1928851344045980}
+  m_RootGameObject: {fileID: 1665081497551358}
   m_IsPrefabParent: 1
---- !u!1 &1928851344045980
+--- !u!1 &1665081497551358
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4846436243880296}
-  - component: {fileID: 212849705428055894}
-  - component: {fileID: 114145198465881818}
-  - component: {fileID: 61044685648014512}
-  - component: {fileID: 50530642934082766}
+  - component: {fileID: 4075471156454994}
+  - component: {fileID: 212797032710481776}
+  - component: {fileID: 61851312199935252}
+  - component: {fileID: 114566019736205896}
   m_Layer: 0
-  m_Name: Train
+  m_Name: Trees
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4846436243880296
+--- !u!4 &4075471156454994
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1928851344045980}
+  m_GameObject: {fileID: 1665081497551358}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 18.945, y: -23.108, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50530642934082766
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1928851344045980}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 10000
-  m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!61 &61044685648014512
+--- !u!61 &61851312199935252
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1928851344045980}
+  m_GameObject: {fileID: 1665081497551358}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -86,35 +65,30 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.1}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114145198465881818
+--- !u!114 &114566019736205896
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1928851344045980}
+  m_GameObject: {fileID: 1665081497551358}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36d523d2db5469142b50a2e8f1d4231a, type: 3}
+  m_Script: {fileID: 11500000, guid: 4910c55d667f9ff4fa109459f28a535f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.0035
-  isEngine: 1
-  heading: {x: 0, y: 0, z: 0}
-  currentTilePoint: {x: 0, y: 0, z: 0}
-  northSouth: {fileID: 21300000, guid: 8b9660c6c0fd7014aa569cb41bdb14ab, type: 3}
-  eastWest: {fileID: 21300000, guid: 7ba71dd42bd904545a5e39c61eed5594, type: 3}
-  direction: 1
-  maxTime: 10
-  currentTrack: {fileID: 0}
-  lastTrack: {fileID: 0}
---- !u!212 &212849705428055894
+  dropOnDesttroy: {fileID: 1998744393518436, guid: 06ae45700b3c2c64b85b02b16170328c,
+    type: 2}
+  maxHealth: 5
+  promptPrefab: {fileID: 1895939692346482, guid: 1a562b63339c7154cae96190b0f0b35e,
+    type: 2}
+--- !u!212 &212797032710481776
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1928851344045980}
+  m_GameObject: {fileID: 1665081497551358}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -140,10 +114,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1870356439
-  m_SortingLayer: 4
+  m_SortingLayerID: 2033022825
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d165a7301fd02474d8622ecb2c969ec9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 54be28af3bc87114db65f8a3cdb1ca8b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

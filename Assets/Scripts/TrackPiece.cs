@@ -33,4 +33,14 @@ public class TrackPiece : MonoBehaviour
 
     }
 
+    public bool isValidInputDirection(TravelDir inputDirection)
+    {
+        foreach (TrackConnection connection in connections)
+        {
+            if (inputDirection == connection.from) { return true; }
+        }
+
+        return false;
+    }
+
 }

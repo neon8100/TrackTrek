@@ -12,6 +12,8 @@ public class GatherableMaterial : MonoBehaviour {
 
     Rigidbody2D body;
 
+    public GameObject promptPrefab;
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
@@ -45,6 +47,35 @@ public class GatherableMaterial : MonoBehaviour {
         LeanTween.scale(gameObject, new Vector3(1.1f, 1.1f), 0.1f).setLoopPingPong(1);
     }
 
+
+    GameObject prompt;
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<PlayerController>())
+        {
+            prompt = Instantiate(promptPrefab);
+            prompt.transform.position = new Vector3(transform.position.x, transform.position.y + 1);
+        }
+    }
+
+    public void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<PlayerController>())
+        {
+            if (prompt != null)
+            {
+                prompt.transform.position = new Vector3(transform.position.x, transform.position.y + 1);
+            }
+        }
+    }
+
+    public void OnCollisionExit2D(Collision2D collision)
+    {
+        if (prompt != null)
+        {
+            Destroy(prompt);
+        }
+    }
 
 
 }

@@ -225,6 +225,7 @@ public class PlayerController : MonoBehaviour {
             {
                 Destroy(trackGhost);
             }
+            lookPointer.gameObject.SetActive(false);
         }
         else
         {
@@ -296,7 +297,8 @@ public class PlayerController : MonoBehaviour {
         holdingMaterial = false;
 
         GameEvents.events.onLayTrack();
-
         lookPointer.gameObject.SetActive(false);
+
+
     }
 }

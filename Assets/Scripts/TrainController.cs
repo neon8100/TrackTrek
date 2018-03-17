@@ -15,7 +15,8 @@ public enum TravelDir
 public class TrainController : MonoBehaviour {
 
     public float speed = 1f;
-
+    public bool isEngine;
+    public GameObject explosionPrefab;
     List<TrackPiece> tracks;
 
     public Vector3 heading;
@@ -28,6 +29,11 @@ public class TrainController : MonoBehaviour {
 
     public int maxTime = 5;
     int gameOverTime;
+
+    public void OnEnable()
+    {
+        gameObject.name = "Train";
+    }
 
     private void Start()
     {
@@ -84,7 +90,10 @@ public class TrainController : MonoBehaviour {
         if (gameOverTime < 0)
         {
             Destroy(gameObject);
-            GameEvents.events.onGameLose();
+            if (isEngine)
+            {
+                GameEvents.events.onGameLose();
+            }
         }
         else
         {
@@ -92,9 +101,21 @@ public class TrainController : MonoBehaviour {
         }
     }
 
+    public void Crash()
+    {
+        Instantiate(explosionPrefab);
+
+        Destroy(gameObject);
+        if (isEngine)
+        {
+            GameEvents.events.onGameLose();
+        }
+    }
+
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
+       
             if (collision.GetComponent<TrackPiece>() != null)
             {
                 gameOverTime = maxTime;
@@ -114,8 +135,15 @@ public class TrainController : MonoBehaviour {
                 {
                 if (currentTrack != lastTrack)
                 {
-                    direction = currentTrack.GetOutputDirection(direction);
-                    lastTrack = currentTrack;
+                    if (currentTrack.isValidInputDirection(direction))
+                    {
+                        direction = currentTrack.GetOutputDirection(direction);
+                        lastTrack = currentTrack;
+                    }
+                    else
+                    {
+                        Crash();
+                    }
                 }
                     
                 }
