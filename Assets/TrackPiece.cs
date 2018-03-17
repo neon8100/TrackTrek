@@ -11,7 +11,12 @@ public class TrackConnection
 
 public class TrackPiece : MonoBehaviour
 {
-    BoxCollider2D boxCollider;
+    public BoxCollider2D boxCollider;
+
+    private void Awake()
+    {
+        boxCollider = GetComponent<BoxCollider2D>();
+    }
 
     [Tooltip("The connection point co-ordinates for this track piece.")]
     public TrackConnection[] connections;

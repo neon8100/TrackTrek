@@ -185,6 +185,7 @@ public class PlayerController : MonoBehaviour {
     {
         trackGhost = Instantiate(trackAssets.trackTypes[trackIndex]);
         trackGhost.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.25f);
+        trackGhost.GetComponent<TrackPiece>().boxCollider.enabled = false;
         GameEvents.events.onUIChooseTrack();
     }
 
@@ -208,7 +209,7 @@ public class PlayerController : MonoBehaviour {
     void PlaceTrack()
     {
         trackGhost.GetComponent<SpriteRenderer>().color = Color.white;
-        
+        trackGhost.GetComponent<TrackPiece>().boxCollider.enabled = true;
         trackGhost = null;
 
         Destroy(material.gameObject);
