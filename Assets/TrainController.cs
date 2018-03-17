@@ -26,9 +26,16 @@ public class TrainController : MonoBehaviour {
 
     public TravelDir direction = TravelDir.East;
 
+    public int maxTime = 5;
+    int gameOverTime;
+
     private void Start()
     {
         GameEvents.Initialise();
+
+        gameOverTime = maxTime;
+
+        StartCoroutine(Count());
     }
 
     public void Update()
@@ -65,11 +72,29 @@ public class TrainController : MonoBehaviour {
 
     }
 
+    IEnumerator Count()
+    {
+        yield return new WaitForSeconds(1f);
+
+        gameOverTime--;
+        Debug.Log(gameOverTime);
+        if (gameOverTime < 0)
+        {
+            Destroy(gameObject);
+            GameEvents.events.onGameLose();
+        }
+        else
+        {
+            StartCoroutine(Count());
+        }
+    }
+
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
             if (collision.GetComponent<TrackPiece>() != null)
             {
+                gameOverTime = maxTime;
                 currentTrack = collision.GetComponent<TrackPiece>();
             }
     }
@@ -86,7 +111,6 @@ public class TrainController : MonoBehaviour {
                 {
                 if (currentTrack != lastTrack)
                 {
-
                     direction = currentTrack.GetOutputDirection(direction);
                     lastTrack = currentTrack;
                 }
