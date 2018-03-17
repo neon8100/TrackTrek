@@ -28,6 +28,9 @@ public class UIManager : MonoBehaviour {
     [SerializeField]
     private GameObject youLosePanel;
    
+    [SerializeField]
+    private Selectable startSelectable;
+
 
 	// Use this for initialization
 	void Start () {
@@ -37,37 +40,12 @@ public class UIManager : MonoBehaviour {
         GameEvents.events.onGamePause += ShowPauseGameMenu;
         GameEvents.events.onGameRestart += ShowTitlePanel;
         GameEvents.events.onGameRestart += HideYouWinLosePanel;
-	}
-	
-	// Update is called once per frame
-	void Update () {
 
-        if (showTitlePanel)
-        {
-            ShowTitlePanel();
-            showTitlePanel = false;
-        }
-
-        if (showGameOverPanel)
-        {
-            ShowGameOverPanel();
-            showGameOverPanel = false;
-        }
+        startSelectable.Select();
 	}
 
-	private void FixedUpdate()
-	{
-        if(CrossPlatformInputManager.GetButtonDown("Fire2")){
-            showTitlePanel = true;
-        }
-
-        if(CrossPlatformInputManager.GetButtonDown("Fire3")){
-            showGameOverPanel = true;
-        }
-	}
-
-    public void ShowPauseGameMenu(){
-
+	public void ShowPauseGameMenu(){
+        if (titleMenuPanel.activeInHierarchy || gameOverPanel.activeInHierarchy) { return; }
         
         if(!pausePanel.activeInHierarchy){
             showPausePanel = true;
@@ -104,6 +82,8 @@ public class UIManager : MonoBehaviour {
             pausePanel.SetActive(false);
             gameOverPanel.SetActive(false);
             logoPanel.SetActive(true);
+
+            startSelectable.Select();
         }
         else if (titleMenuPanel.activeInHierarchy)
         {

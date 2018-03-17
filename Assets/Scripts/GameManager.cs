@@ -27,8 +27,12 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         //GameEvents.events.onGamePause += PauseGame;
-        //GameEvents.events.onGamePause += SetTimeScale;
+        GameEvents.events.onGamePause += SetTimeScale;
         GameEvents.events.onGameRestart += UnloadLevelScene;
+
+        /*
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;*/
 	}
 	
 	// Update is called once per frame
@@ -40,7 +44,7 @@ public class GameManager : MonoBehaviour {
             gameSceneCamera.SetActive(true);
         }
 
-        if (CrossPlatformInputManager.GetButtonDown("Jump"))
+        if (CrossPlatformInputManager.GetButtonDown("PauseP1") || CrossPlatformInputManager.GetButtonDown("PauseP2"))
         {
             GameEvents.events.onGamePause();
             //SetTimeScale();
@@ -73,7 +77,14 @@ public class GameManager : MonoBehaviour {
         if (!SceneManager.GetSceneByName("Level").isLoaded)
         {
             SceneManager.LoadScene("Level", LoadSceneMode.Additive);
+            /*Scene levelScene = SceneManager.GetSceneByName("Level");
+            SceneManager.SetActiveScene(levelScene);
+            SceneManager.sceneLoaded += OnSceneLoaded;*/
         }
+    }
+
+    private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1){
+        SceneManager.SetActiveScene(arg0);
     }
 
     public void UnloadLevelScene()
