@@ -15,6 +15,7 @@ public class LevelGenerator : MonoBehaviour {
     PolygonCollider2D bounds;
 
     public GameObject train;
+    public GameObject car;
 
     public Cinemachine.CinemachineConfiner confiner;
 
@@ -63,7 +64,9 @@ public class LevelGenerator : MonoBehaviour {
                 }
                 if(levelLayout.layouts[count] == LayoutType.TrackStart)
                 {
-                    AddTileToLevel(new Vector2(xPos, yPos), train);
+                    AddTileToLevel(new Vector2(xPos+1, yPos), train);
+                    AddTileToLevel(new Vector2(xPos, yPos), car);
+                    AddTileToLevel(new Vector2(xPos-1, yPos), car);
                 }
 
                 count++;
