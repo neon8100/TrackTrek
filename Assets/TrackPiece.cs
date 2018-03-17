@@ -16,19 +16,12 @@ public class TrackPiece : MonoBehaviour
     [Tooltip("The connection point co-ordinates for this track piece.")]
     public TrackConnection[] connections;
 
-    private void Awake()
-    {
-        boxCollider = gameObject.AddComponent<BoxCollider2D>();
-        boxCollider.isTrigger = true;
-    }
-
     public TravelDir GetOutputDirection(TravelDir inputDirection)
     {
 
         foreach(TrackConnection connection in connections)
         {
-            if(connection.from == inputDirection) { return connection.to; }
-            if(connection.to == inputDirection) { return connection.from; }
+            if(inputDirection == connection.from) { return connection.to; }
         }
 
         return TravelDir.None;

@@ -8,5 +8,21 @@ public enum TileTypes
     Dirt,
     Rock,
     Water
-   
+}
+
+[System.Serializable]
+public enum LayoutType
+{
+    None,
+    Wood,
+    TrackHorizontal,
+    TrackVertical,
+    TrackLE,
+    TrackLW,
+    TrackNE,
+    TrackNW,
+    TrackCross,
+    TrackStart,
+    TrackEnd,
+
 }

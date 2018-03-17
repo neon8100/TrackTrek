@@ -23,6 +23,8 @@ public class LevelEditor : EditorWindow
 
     bool clear;
 
+    bool toggleLayouts;
+
     public void OnGUI()
     {
         buttonColors[0] = Color.green;
@@ -30,13 +32,9 @@ public class LevelEditor : EditorWindow
         buttonColors[2] = Color.grey;
         buttonColors[3] = Color.blue;
 
-
-
-
-
-
-
         level = (TileLayoutAsset) EditorGUILayout.ObjectField("Level To Edit", level, typeof(TileLayoutAsset), false);
+
+        
 
         if (level == null) { EditorGUILayout.LabelField("Add Asset to get started"); return; }
         if (GUILayout.Button("Load Map Size"))
@@ -60,6 +58,21 @@ public class LevelEditor : EditorWindow
         {
 
             clear = true;
+        }
+        toggleLayouts = GUILayout.Toggle(toggleLayouts, "Toggle Layout");
+        Debug.Log(toggleLayouts);
+        if (toggleLayouts)
+        {
+            if (GUILayout.Button("Generate Layouts"))
+            {
+                 int size = (int)level.mapSize.y * (int)level.mapSize.x;
+                    level.layouts = new LayoutType[size];
+                    for (int i = 0; i < size; i++)
+                    {
+                        level.layouts[i] = (LayoutType)0;
+                    }
+                
+            }
         }
 
         EditorGUILayout.EndHorizontal();
@@ -87,15 +100,67 @@ public class LevelEditor : EditorWindow
             {
                 
                 int tile = (int)level.tiles[count];
+                int layout = (int)level.layouts[count];
 
                 GUI.backgroundColor = buttonColors[tile];
 
-                if (GUILayout.Button(tile.ToString(), GUILayout.Width(25)))
+                if (toggleLayouts)
                 {
-                    tile++;
-                    if (tile > 3) { tile = 0; }
+                    string icon = "";
+                    switch ((LayoutType)layout)
+                    {
+                        case LayoutType.None:
+                            icon = "";
+                            break;
+                        case LayoutType.Wood:
+                            icon = "[W]";
+                            break;
+                        case LayoutType.TrackHorizontal:
+                            icon = "-";
+                            break;
+                        case LayoutType.TrackVertical:
+                            icon = "|";
+                            break;
+                        case LayoutType.TrackLE:
+                            icon = "|_";
+                            break;
+                        case LayoutType.TrackLW:
+                            icon = "_|";
+                            break;
+                        case LayoutType.TrackNE:
+                            icon = "|^^";
+                            break;
+                        case LayoutType.TrackNW:
+                            icon = "^^|";
+                            break;
+                        case LayoutType.TrackCross:
+                            icon = "+";
+                            break;
+                        case LayoutType.TrackStart:
+                            icon = "[S]";
+                            break;
+                        case LayoutType.TrackEnd:
+                            icon = "[E]";
+                            break;
+                    }
 
-                    level.tiles[count] = (TileTypes)tile;
+                    if (GUILayout.Button(icon, GUILayout.Width(25)))
+                    {
+                        layout++;
+                        if (layout > 10) { layout = 0; }
+
+                        level.layouts[count] = (LayoutType)layout;
+                    }
+                }
+                else
+                {
+                    if (GUILayout.Button(tile.ToString(), GUILayout.Width(25)))
+                    {
+                        tile++;
+                        if (tile > 3) { tile = 0; }
+
+                        level.tiles[count] = (TileTypes)tile;
+                    }
                 }
 
                 count++;
