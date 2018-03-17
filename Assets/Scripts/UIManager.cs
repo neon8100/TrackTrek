@@ -135,6 +135,7 @@ public class UIManager : MonoBehaviour {
     }
 
     public void ReturnToTitle(){
+        GameEvents.events.onGamePause();
         GameEvents.events.onGameRestart();
     }
 
