@@ -83,8 +83,9 @@ public class TrainController : MonoBehaviour {
         gameOverTime--;
         if (gameOverTime < 0)
         {
-            Destroy(gameObject);
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
             GameEvents.events.onGameLose();
+            StartCoroutine(WaitForGameOver());
         }
         else
         {
@@ -92,6 +93,11 @@ public class TrainController : MonoBehaviour {
         }
     }
 
+    IEnumerator WaitForGameOver(){
+        yield return new WaitForSeconds(2f);
+        GameEvents.events.onGameOver();
+        Destroy(gameObject);
+    }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
