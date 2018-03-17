@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4555209361538924}
   - component: {fileID: 212207152884310622}
   - component: {fileID: 114657957390571762}
-  - component: {fileID: 61514055333335520}
+  - component: {fileID: 61196193390999984}
   m_Layer: 0
-  m_Name: track_curve_0
+  m_Name: track_curve_NE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61514055333335520
+--- !u!61 &61196193390999984
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -65,7 +65,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
 --- !u!114 &114657957390571762
 MonoBehaviour:
@@ -79,8 +79,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connections:
-  - from: 2
-    to: 1
+  - from: 0
+    to: 3
+  - from: 1
+    to: 2
 --- !u!212 &212207152884310622
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -117,7 +119,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a158bf681bc53b946a52b6599e500c59, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.2, y: 0.2}
