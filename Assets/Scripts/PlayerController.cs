@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour {
 
     public GameObject sprite;
 
+    public PlayerSpriteAnimator animator;
+
     private void Awake()
     {
 
@@ -46,11 +48,38 @@ public class PlayerController : MonoBehaviour {
     float x = 0;
     float y = 0;
 
+    float horizontal;
+    float vertical;
+
+    private void Update()
+    {
+         vertical = Input.GetAxis("VerticalP" + playerId);
+        horizontal = Input.GetAxis("HorizontalP" + playerId);
+
+        if (actionButton > 0)
+        {
+            animator.SwitchState(PlayerSpriteAnimator.State.Action, true);
+        }
+        else if (vertical == 0 && horizontal == 0)
+        {
+            animator.SwitchState(PlayerSpriteAnimator.State.Idle);
+        }
+        else
+        {
+            animator.SwitchState(PlayerSpriteAnimator.State.Moving);
+            if (horizontal > 0)
+            {
+                sprite.GetComponent<SpriteRenderer>().flipX = true;
+            }
+            else
+            {
+                sprite.GetComponent<SpriteRenderer>().flipX = false;
+            }
+        }
+    }
+
     private void FixedUpdate()
     {
-        
-        float vertical = Input.GetAxis("VerticalP"+playerId);
-        float horizontal = Input.GetAxis("HorizontalP"+playerId);
 
         Vector3 pos = new Vector3(transform.position.x, transform.position.y);
         Vector3 newPos = pos + new Vector3(horizontal * speed, vertical * speed);
@@ -111,6 +140,7 @@ public class PlayerController : MonoBehaviour {
                 y = 0;
                 x = Mathf.Round(transform.position.x) + x;
                 y = Mathf.Round(transform.position.y) + y;
+               
             }
             else if (horizontal < -0.5f)
             {
@@ -174,6 +204,7 @@ public class PlayerController : MonoBehaviour {
             
         }
     }
+   
     void HandleDestructableCollision(GatherableMaterial gatherable)
     {
         if (actionButton > 0)

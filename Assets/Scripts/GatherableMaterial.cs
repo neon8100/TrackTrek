@@ -28,8 +28,15 @@ public class GatherableMaterial : MonoBehaviour {
 
         if (currentHealth < 0)
         {
+            Drop();
             Destroy(gameObject);
         }
+    }
+
+    void Drop()
+    {
+        GameObject obj = Instantiate(dropOnDesttroy);
+        obj.transform.position = transform.position;
     }
 
     void Pop()
@@ -37,13 +44,6 @@ public class GatherableMaterial : MonoBehaviour {
         transform.localScale = new Vector3(1f,1f);
         LeanTween.scale(gameObject, new Vector3(1.1f, 1.1f), 0.1f).setLoopPingPong(1);
     }
-
-    public void OnDestroy()
-    {
-        GameObject obj = Instantiate(dropOnDesttroy);
-        obj.transform.position = transform.position;
-    }
-
 
 
 

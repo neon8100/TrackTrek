@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class SpriteAnimator : MonoBehaviour {
 
+
     SpriteRenderer spriteRenderer;
+
+    public bool animLock;
+    public bool completedOnce;
 
     public int framesPerSecond = 15;
 
@@ -16,10 +20,13 @@ public class SpriteAnimator : MonoBehaviour {
     private Sprite[] selectedFrames;
     public void SetSelectedFrames(Sprite[] frames)
     {
+       
         selectedFrames = frames;
+        _currentFrame = 0;
+        completedOnce = false;
     }
     
-    private void Awake()
+    protected virtual void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         selectedFrames = sprites;
@@ -28,6 +35,8 @@ public class SpriteAnimator : MonoBehaviour {
     float count;
     private void FixedUpdate()
     {
+        if (selectedFrames.Length == 0) { return; }
+
         if (stopped) return;
         float secondsPerFrame = (float)framesPerSecond/60;
         count += secondsPerFrame;
@@ -38,10 +47,14 @@ public class SpriteAnimator : MonoBehaviour {
         }
 
     }
-
+    
     public void UpdateFrame()
     {
-        if (currentFrame > selectedFrames.Length - 1) { _currentFrame = 0; }
+        
+        if (currentFrame > selectedFrames.Length - 1) {
+            _currentFrame = 0;
+            completedOnce = true;
+        }
         spriteRenderer.sprite = selectedFrames[currentFrame];
         _currentFrame++;
 
