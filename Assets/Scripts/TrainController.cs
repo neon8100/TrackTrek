@@ -103,7 +103,8 @@ public class TrainController : MonoBehaviour {
 
     public void Crash()
     {
-        Instantiate(explosionPrefab);
+        GameObject explo = Instantiate(explosionPrefab);
+        explo.transform.position = transform.position;
 
         Destroy(gameObject);
         if (isEngine)

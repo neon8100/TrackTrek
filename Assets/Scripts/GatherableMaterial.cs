@@ -6,7 +6,8 @@ public class GatherableMaterial : MonoBehaviour {
 
     public GameObject dropOnDesttroy;
 
-    public int maxHealth;
+    public Vector2 healthRange;
+    int maxHealth;
 
     int currentHealth;
 
@@ -14,17 +15,24 @@ public class GatherableMaterial : MonoBehaviour {
 
     public GameObject promptPrefab;
 
+    public HealthBar healthBar;
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        maxHealth = (int)Random.Range(healthRange.x, healthRange.y);
         currentHealth = maxHealth;
     }
 
     public void Damage()
     {
+        healthBar.gameObject.SetActive(true);
+
         GameEvents.events.onInteractResource();
 
         currentHealth--;
+
+        healthBar.currentValue = currentHealth;
 
         Pop();
 
@@ -71,6 +79,8 @@ public class GatherableMaterial : MonoBehaviour {
 
     public void OnCollisionExit2D(Collision2D collision)
     {
+        healthBar.gameObject.SetActive(false);
+
         if (prompt != null)
         {
             Destroy(prompt);

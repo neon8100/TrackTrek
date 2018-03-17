@@ -101,6 +101,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.0035
   isEngine: 1
+  explosionPrefab: {fileID: 1366635819873382, guid: 037d78536a03aa348a3e0b29a9ff8f6c,
+    type: 2}
   heading: {x: 0, y: 0, z: 0}
   currentTilePoint: {x: 0, y: 0, z: 0}
   northSouth: {fileID: 21300000, guid: 8b9660c6c0fd7014aa569cb41bdb14ab, type: 3}
