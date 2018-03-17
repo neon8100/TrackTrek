@@ -89,11 +89,7 @@ public class TrainController : MonoBehaviour {
         gameOverTime--;
         if (gameOverTime < 0)
         {
-            Destroy(gameObject);
-            if (isEngine)
-            {
-                GameEvents.events.onGameLose();
-            }
+            Crash();
         }
         else
         {
@@ -107,6 +103,7 @@ public class TrainController : MonoBehaviour {
         explo.transform.position = transform.position;
 
         Destroy(gameObject);
+
         if (isEngine)
         {
             GameEvents.events.onGameLose();

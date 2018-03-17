@@ -19,16 +19,22 @@ public class LevelGenerator : MonoBehaviour {
 
     public Cinemachine.CinemachineConfiner confiner;
 
+    /*
     public void Awake()
     {
         GenerateLevel();
 
         bounds = map.AddComponent<PolygonCollider2D>();
         instance = this;
-    }
+    }*/
 
     private void Start()
     {
+        GenerateLevel();
+
+        bounds = map.AddComponent<PolygonCollider2D>();
+        instance = this;
+
         Vector2[] b = new Vector2[4];
         b[0] = new Vector2(0, 0);
         b[1] = new Vector2(0, -levelLayout.mapSize.y);

@@ -73,26 +73,28 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void LoadLevelScene(){
+    public void LoadLevelScene()
+    {
         if (!SceneManager.GetSceneByName("Level").isLoaded)
         {
-            SceneManager.LoadScene("Level", LoadSceneMode.Additive);
-            /*Scene levelScene = SceneManager.GetSceneByName("Level");
-            SceneManager.SetActiveScene(levelScene);
-            SceneManager.sceneLoaded += OnSceneLoaded;*/
+            AsyncOperation op = SceneManager.LoadSceneAsync("Level", LoadSceneMode.Additive);
+            SceneManager.sceneLoaded += OnSceneLoaded;
+         
         }
     }
 
+    
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1){
+        SceneManager.sceneLoaded -= OnSceneLoaded;
         SceneManager.SetActiveScene(arg0);
     }
 
     public void UnloadLevelScene()
     {
+        Scene gameScene = SceneManager.GetSceneByName("Level");
+        SceneManager.SetActiveScene(gameScene);
         SceneManager.UnloadSceneAsync(1);
     }
-
-
 
 	private void OnDestroy()
 	{
