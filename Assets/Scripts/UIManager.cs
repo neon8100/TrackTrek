@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour {
     private bool pressPauseWhilePaused;
 
     [SerializeField]
+    private EventSystem eventSystem;
+    [SerializeField]
     private GameObject logoPanel;
     [SerializeField]
     private GameObject titleMenuPanel;
@@ -30,6 +32,10 @@ public class UIManager : MonoBehaviour {
    
     [SerializeField]
     private Selectable startSelectable;
+    [SerializeField]
+    private Selectable pauseSelectable;
+    [SerializeField]
+    private Selectable gameOverSelectable;
 
 
 	// Use this for initialization
@@ -56,6 +62,7 @@ public class UIManager : MonoBehaviour {
 
         pausePanel.SetActive(showPausePanel);
         logoPanel.SetActive(showPausePanel);
+        pauseSelectable.Select();
     }
 
     private void ShowGameOverPanel()
@@ -66,6 +73,7 @@ public class UIManager : MonoBehaviour {
             pausePanel.SetActive(false);
             titleMenuPanel.SetActive(false);
             youLosePanel.SetActive(true);
+            gameOverSelectable.Select();
         } else if (gameOverPanel.activeInHierarchy){
             gameOverPanel.SetActive(false);
             pausePanel.SetActive(false);
