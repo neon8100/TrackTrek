@@ -7,15 +7,16 @@ public class LevelGenerator : MonoBehaviour {
     public static LevelGenerator instance;
 
     public TileLayoutAsset levelLayout;
+    public MapAssets mapAssets;
 
     public GameObject player1;
     public GameObject player2;
 
     PolygonCollider2D bounds;
 
-    public Cinemachine.CinemachineConfiner confiner;
+    public GameObject train;
 
-    public List<TrackPiece> tracks;
+    public Cinemachine.CinemachineConfiner confiner;
 
     public void Awake()
     {
@@ -56,6 +57,15 @@ public class LevelGenerator : MonoBehaviour {
                 int xPos = x;
                 int yPos = -y;
                 AddTileToLevel(new Vector2(xPos, yPos), tileList[count]);
+
+                if (levelLayout.layouts[count] != LayoutType.None) {
+                    AddTileToLevel(new Vector2(xPos, yPos), mapAssets.GetAsset(levelLayout.layouts[count]));
+                }
+                if(levelLayout.layouts[count] == LayoutType.TrackStart)
+                {
+                    AddTileToLevel(new Vector2(xPos, yPos), train);
+                }
+
                 count++;
             }
         }

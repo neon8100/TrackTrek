@@ -21,14 +21,14 @@ public class TrainController : MonoBehaviour {
     public Vector3 heading;
     public Vector3 currentTilePoint;
 
+    public Sprite northSouth;
+    public Sprite eastWest;
+
     public TravelDir direction = TravelDir.East;
 
     private void Start()
     {
         GameEvents.Initialise();
-        GameEvents.events.onLayTrack += UpdateTrackList;
-
-        UpdateTrackList();
     }
 
     public void Update()
@@ -37,19 +37,28 @@ public class TrainController : MonoBehaviour {
         {
             case TravelDir.East:
                 heading = transform.position + transform.right;
+               gameObject.GetComponent<SpriteRenderer>().sprite = eastWest;
+                gameObject.GetComponent<SpriteRenderer>().flipX = true;
                 break;
             case TravelDir.West:
                 heading = transform.position - transform.right;
+                gameObject.GetComponent<SpriteRenderer>().sprite = eastWest;
+                gameObject.GetComponent<SpriteRenderer>().flipX = false;
                 break;
             case TravelDir.North:
                 heading = transform.position + transform.up;
+                gameObject.GetComponent<SpriteRenderer>().sprite = northSouth;
+                gameObject.GetComponent<SpriteRenderer>().flipY = false;
                 break;
             case TravelDir.South:
                 heading = transform.position - transform.up;
+                gameObject.GetComponent<SpriteRenderer>().sprite = northSouth;
+                gameObject.GetComponent<SpriteRenderer>().flipY = true;
                 break;
         }
         
         transform.position = Vector3.MoveTowards(transform.position, heading, speed);
+
         currentTilePoint = new Vector3(Mathf.Floor(transform.position.x), Mathf.Floor(transform.position.y));
 
         CheckCurrentTrackDirection();
@@ -57,18 +66,12 @@ public class TrainController : MonoBehaviour {
     }
 
 
-    public void OnTriggerStay2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
             if (collision.GetComponent<TrackPiece>() != null)
             {
                 currentTrack = collision.GetComponent<TrackPiece>();
             }
-        
-    }
-
-    public void OnTriggerExit2D(Collider2D collision)
-    {
-        currentTrack = null;
     }
 
     public TrackPiece currentTrack;
@@ -78,17 +81,18 @@ public class TrainController : MonoBehaviour {
     {
         if (currentTrack != null)
         {
-           if (currentTrack != lastTrack)
-            {
-                Debug.Log("MATCH");
-                currentTrack.GetOutputDirection(direction);
-                lastTrack = currentTrack;
-            }
-        }
-    }
+        
+            if(Mathf.Floor(currentTrack.transform.position.x) == currentTilePoint.x && Mathf.Floor(currentTrack.transform.position.y) == currentTilePoint.y)
+                {
+                if (currentTrack != lastTrack)
+                {
 
-    void UpdateTrackList()
-    {
-        tracks = LevelGenerator.instance.tracks;
+                    direction = currentTrack.GetOutputDirection(direction);
+                    lastTrack = currentTrack;
+                }
+                    
+                }
+            
+        }
     }
 }

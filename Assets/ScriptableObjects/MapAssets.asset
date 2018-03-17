@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b94886dff381c54c93f487caa722b61, type: 3}
+  m_Name: MapAssets
+  m_EditorClassIdentifier: 
+  assets:
+  - layout: 1
+    prefab: {fileID: 1665081497551358, guid: 8c59e3ddf81ad5d4985f092797a71569, type: 2}
+  - layout: 2
+    prefab: {fileID: 1746569514092778, guid: 2fb020010a8c0e04893e2d4a586a3d10, type: 2}
+  - layout: 3
+    prefab: {fileID: 1746569514092778, guid: a18a64c8bf7ad924db59963f34e29687, type: 2}
+  - layout: 4
+    prefab: {fileID: 1746569514092778, guid: 7d4bf713f32270448a2448eeb17340ea, type: 2}
+  - layout: 5
+    prefab: {fileID: 1746569514092778, guid: b20114143cec867499f4461bb22f5aa8, type: 2}
+  - layout: 6
+    prefab: {fileID: 1746569514092778, guid: 0d852dd7b2251ee4ba9addba3cd8bb36, type: 2}
+  - layout: 7
+    prefab: {fileID: 1746569514092778, guid: cdc5967a4d2f3a94d9ffe0cac6f1168c, type: 2}
+  - layout: 8
+    prefab: {fileID: 1746569514092778, guid: ec74bacc32965ec40a47184cfd40a5e0, type: 2}
+  - layout: 9
+    prefab: {fileID: 1746569514092778, guid: 2fb020010a8c0e04893e2d4a586a3d10, type: 2}
+  - layout: 10
+    prefab: {fileID: 1746569514092778, guid: 2fb020010a8c0e04893e2d4a586a3d10, type: 2}
