@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Follow: {fileID: 670936734}
   m_Lens:
     FieldOfView: 40
-    OrthographicSize: 6.407979
+    OrthographicSize: 9.603396
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -629,7 +629,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 6.407979
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -652,7 +652,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 713833786}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -868,6 +868,7 @@ MonoBehaviour:
   train: {fileID: 1928851344045980, guid: 9bcf61f819fa526418ef41acd6199f56, type: 2}
   car: {fileID: 1928851344045980, guid: 5253de53ff623654b8a72e60caf80f2b, type: 2}
   confiner: {fileID: 378564202}
+  cam: {fileID: 378564200}
 --- !u!4 &962648404
 Transform:
   m_ObjectHideFlags: 0

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - GameManager
   - Block
+  - Start
+  - End
   layers:
   - Default
   - TransparentFX

@@ -19,6 +19,8 @@ public class LevelGenerator : MonoBehaviour {
 
     public Cinemachine.CinemachineConfiner confiner;
 
+    public Cinemachine.CinemachineVirtualCamera cam;
+
     private void Start()
     {
         GenerateLevel();
@@ -36,6 +38,20 @@ public class LevelGenerator : MonoBehaviour {
         bounds.isTrigger = true;
 
         confiner.m_BoundingShape2D = bounds;
+
+
+        StartCoroutine(Cam());
+
+    }
+
+    IEnumerator Cam()
+    {
+        cam.Follow = GameObject.FindGameObjectWithTag("Start").transform;
+        yield return new WaitForSeconds(2);
+        cam.Follow = GameObject.FindGameObjectWithTag("End").transform;
+        yield return new WaitForSeconds(2);
+        cam.Follow = player1.transform;
+
     }
     
     GameObject map;
