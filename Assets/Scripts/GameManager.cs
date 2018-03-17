@@ -7,8 +7,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
 
     private bool isGamePaused;
+    private bool shouldGameBePaused;
 
     public bool IsGamePaused { get; private set; } 
+    public bool ShouldGameBePaused { get; private set; }
 
 	private void Awake()
 	{
@@ -22,13 +24,19 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        GameEvents.events.onGamePause += SetTimeScale;
+        //GameEvents.events.onGamePause += PauseGame;
+        //GameEvents.events.onGamePause += SetTimeScale;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        print(Time.timeScale);
-        print("Game is paused: "+isGamePaused);
+        print("Time scale is " + Time.timeScale);
+
+        if (CrossPlatformInputManager.GetButtonDown("Jump"))
+        {
+            SetTimeScale();
+            GameEvents.events.onGamePause();
+        } 
 	}
 
 	private void FixedUpdate()
@@ -44,21 +52,21 @@ public class GameManager : MonoBehaviour {
         GameEvents.events.onGameStart();
     }
 
-    public void PauseGame()
+    /*public void PauseGame()
     {
-        GameEvents.events.onGamePause();
-    }
+        isGamePaused = true;
+    }*/
 
     public void SetTimeScale(){
-        if (!isGamePaused) { isGamePaused = true; }
-        else if (isGamePaused) { isGamePaused = false; }
-
-        if(isGamePaused){
+        if (!isGamePaused)
+        {
             Time.timeScale = 0f;
-            print("Stopped time");
-        } else {
+            isGamePaused = true;
+        }
+        else
+        {
             Time.timeScale = 1f;
-            print("Unstopped time");
+            isGamePaused = false;
         }
     }
 
@@ -71,7 +79,7 @@ public class GameManager : MonoBehaviour {
 
 	private void OnDestroy()
 	{
-        GameEvents.events.onGamePause -= SetTimeScale;
+        //GameEvents.events.onGamePause -= SetTimeScale;
 	}
 
 	public void QuitGame(){

@@ -17,5 +17,7 @@ public enum AudioClipTypes
     ChooseTrackType,
     TrainAboutToCrash,
     Lose,
-    Win
+    Win,
+    Music,
+    SelectTypeUI
 }

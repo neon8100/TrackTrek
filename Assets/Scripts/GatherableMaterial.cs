@@ -20,6 +20,8 @@ public class GatherableMaterial : MonoBehaviour {
 
     public void Damage()
     {
+        GameEvents.events.onInteractResource();
+
         currentHealth--;
 
         Pop();

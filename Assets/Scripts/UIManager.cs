@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using UnityStandardAssets.CrossPlatformInput;
 
 public class UIManager : MonoBehaviour {
 
+    [SerializeField]
     private GameManager gameManager;
 
     private bool showPausePanel;
@@ -12,6 +15,8 @@ public class UIManager : MonoBehaviour {
     private bool showGameOverPanel;
     private bool pressPauseWhilePaused;
 
+    [SerializeField]
+    private GameObject logoPanel;
     [SerializeField]
     private GameObject titleMenuPanel;
     [SerializeField]
@@ -31,15 +36,14 @@ public class UIManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        print("show pause panel is "+showPausePanel);
+
+
+
         if (showTitlePanel)
         {
             ShowTitlePanel();
             showTitlePanel = false;
-        }
-
-        if(showPausePanel){
-            ShowPauseGameMenu();
-            showPausePanel = false;
         }
 
         if (showGameOverPanel)
@@ -51,11 +55,6 @@ public class UIManager : MonoBehaviour {
 
 	private void FixedUpdate()
 	{
-        if (CrossPlatformInputManager.GetButtonDown("Jump") && !titleMenuPanel.activeInHierarchy && !gameOverPanel.activeInHierarchy)
-        {
-            GameEvents.events.onGamePause();
-        } 
-
         if(CrossPlatformInputManager.GetButtonDown("Fire2")){
             showTitlePanel = true;
         }
@@ -65,16 +64,17 @@ public class UIManager : MonoBehaviour {
         }
 	}
 
-    //Currently only activates the Pause Panel
     public void ShowPauseGameMenu(){
+
         if(!pausePanel.activeInHierarchy){
-            pausePanel.SetActive(true);
-        } else if (pausePanel.activeInHierarchy){
-            pausePanel.SetActive(false);
-            titleMenuPanel.SetActive(false);
-            gameOverPanel.SetActive(false);
+            showPausePanel = true;
+        } else if (pausePanel.activeInHierarchy)
+        {
+            showPausePanel = false;
         }
 
+        pausePanel.SetActive(showPausePanel);
+        logoPanel.SetActive(showPausePanel);
     }
 
     private void ShowGameOverPanel()
@@ -84,10 +84,12 @@ public class UIManager : MonoBehaviour {
             gameOverPanel.SetActive(true);
             pausePanel.SetActive(false);
             titleMenuPanel.SetActive(false);
+            logoPanel.SetActive(true);
         } else if (gameOverPanel.activeInHierarchy){
             gameOverPanel.SetActive(false);
             pausePanel.SetActive(false);
             titleMenuPanel.SetActive(false);
+            logoPanel.SetActive(false);
         }
     }
 
@@ -98,12 +100,14 @@ public class UIManager : MonoBehaviour {
             titleMenuPanel.SetActive(true);
             pausePanel.SetActive(false);
             gameOverPanel.SetActive(false);
+            logoPanel.SetActive(true);
         }
         else if (titleMenuPanel.activeInHierarchy)
         {
             titleMenuPanel.SetActive(false);
             pausePanel.SetActive(false);
             gameOverPanel.SetActive(false);
+            logoPanel.SetActive(false);
         }
     }
 
