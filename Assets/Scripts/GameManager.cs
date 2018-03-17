@@ -25,20 +25,16 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         //GameEvents.events.onGamePause += PauseGame;
-        GameEvents.events.onGamePause += SetTimeScale;
+        //GameEvents.events.onGamePause += SetTimeScale;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        print("Time scale is " + Time.timeScale);
 
         if (CrossPlatformInputManager.GetButtonDown("Jump"))
         {
-            if(isGamePaused){
-                shouldGameBePaused = false;
-            } else if (!isGamePaused){
-                shouldGameBePaused = true;
-            }
-
+            SetTimeScale();
             GameEvents.events.onGamePause();
         } 
 	}
@@ -62,14 +58,15 @@ public class GameManager : MonoBehaviour {
     }*/
 
     public void SetTimeScale(){
-        if(shouldGameBePaused){
+        if (!isGamePaused)
+        {
             Time.timeScale = 0f;
             isGamePaused = true;
-            print("Stopped time");
-        } else if(!shouldGameBePaused){
+        }
+        else
+        {
             Time.timeScale = 1f;
             isGamePaused = false;
-            print("Unstopped time");
         }
     }
 
@@ -82,7 +79,7 @@ public class GameManager : MonoBehaviour {
 
 	private void OnDestroy()
 	{
-        GameEvents.events.onGamePause -= SetTimeScale;
+        //GameEvents.events.onGamePause -= SetTimeScale;
 	}
 
 	public void QuitGame(){
