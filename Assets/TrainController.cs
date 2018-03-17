@@ -68,7 +68,7 @@ public class TrainController : MonoBehaviour {
                 break;
         }
         
-        transform.position = Vector3.MoveTowards(transform.position, heading, speed);
+        transform.position = Vector3.MoveTowards(transform.position, heading, speed * Time.timeScale);
 
         currentTilePoint = new Vector3(Mathf.Floor(transform.position.x), Mathf.Floor(transform.position.y));
 
@@ -81,7 +81,6 @@ public class TrainController : MonoBehaviour {
         yield return new WaitForSeconds(1f);
 
         gameOverTime--;
-        Debug.Log(gameOverTime);
         if (gameOverTime < 0)
         {
             Destroy(gameObject);

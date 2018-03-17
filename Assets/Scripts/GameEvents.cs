@@ -8,10 +8,14 @@ public class GameEvents
     /// <summary>
     /// Initialised the GameEvent static member. Call this at the start if the app.
     /// </summary>
+    /// 
+    public static bool isInit;
     public static void Initialise()
     {
+        if (isInit) { return; }
         events = new GameEvents();
         events.Init();
+        isInit = true;
     }
 
     //Decalere a new delegate type

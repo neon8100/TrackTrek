@@ -37,8 +37,6 @@ public class UIManager : MonoBehaviour {
         GameEvents.events.onGamePause += ShowPauseGameMenu;
         GameEvents.events.onGameRestart += ShowTitlePanel;
         GameEvents.events.onGameRestart += HideYouWinLosePanel;
-
-        GameObject.FindGameObjectWithTag("GameManager");
 	}
 	
 	// Update is called once per frame
@@ -70,6 +68,7 @@ public class UIManager : MonoBehaviour {
 
     public void ShowPauseGameMenu(){
 
+        
         if(!pausePanel.activeInHierarchy){
             showPausePanel = true;
         } else if (pausePanel.activeInHierarchy)
@@ -79,6 +78,8 @@ public class UIManager : MonoBehaviour {
 
         pausePanel.SetActive(showPausePanel);
         logoPanel.SetActive(showPausePanel);
+        
+        pausePanel.gameObject.SetActive(true);
     }
 
     private void ShowGameOverPanel()

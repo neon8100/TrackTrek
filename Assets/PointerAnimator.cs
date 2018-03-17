@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class PointerAnimator : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private void OnEnable()
+    {
+        LeanTween.scale(gameObject, new Vector3(0.85f, 0.85f, 0.85f), 0.5f).setLoopPingPong();
+    }
 }

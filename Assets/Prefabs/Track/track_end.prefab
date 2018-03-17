@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212207152884310622}
   - component: {fileID: 114657957390571762}
   - component: {fileID: 61309179107207222}
+  - component: {fileID: 114771772761383294}
   m_Layer: 0
   m_Name: track_end
   m_TagString: Untagged
@@ -80,10 +81,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boxCollider: {fileID: 0}
   connections:
-  - from: 1
-    to: 1
   - from: 3
     to: 3
+--- !u!114 &114771772761383294
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1746569514092778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a44780bd1812f0246ae057c4d2926392, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212207152884310622
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -42,8 +42,8 @@ public class GameManager : MonoBehaviour {
 
         if (CrossPlatformInputManager.GetButtonDown("Jump"))
         {
-            SetTimeScale();
             GameEvents.events.onGamePause();
+            //SetTimeScale();
         } 
 	}
 
