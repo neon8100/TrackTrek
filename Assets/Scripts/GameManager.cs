@@ -30,18 +30,12 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        print("Time scale is " + Time.timeScale);
 
         if (CrossPlatformInputManager.GetButtonDown("Jump"))
         {
             SetTimeScale();
             GameEvents.events.onGamePause();
         } 
-	}
-
-	private void FixedUpdate()
-	{
-       
 	}
 
 	public void StartGame(){
@@ -52,10 +46,6 @@ public class GameManager : MonoBehaviour {
         GameEvents.events.onGameStart();
     }
 
-    /*public void PauseGame()
-    {
-        isGamePaused = true;
-    }*/
 
     public void SetTimeScale(){
         if (!isGamePaused)

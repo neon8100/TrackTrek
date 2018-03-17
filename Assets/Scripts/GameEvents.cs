@@ -60,6 +60,26 @@ public class GameEvents
     public void Init()
     {
         events = this;
+
+        onGameStart += () => { };
+        onGameOver += () => { };
+        onGamePause += () => { };
+        onGameWin += () => { };
+        onGameLose += () => { };
+
+        onPickupResource += () => { };
+        onDropResource += () => { };
+        onInteractResource += () => { };
+        onResourceCreated += () => { };
+        onDropItem += () => { };
+        onCraftTrack += () => { };
+        onDeleteTrack += () => { };
+        onLayTrack += () => { };
+        onTrainAboutToCrash += () => { };
+
+        onUIChooseTrack += () => { };
+        onUIOpenTrackSelect += () => { };
+
     }
 
     /// <summary>
@@ -87,6 +107,4 @@ public class GameEvents
         onUIChooseTrack = null;
         onUIOpenTrackSelect = null;
     }
-
-
 }

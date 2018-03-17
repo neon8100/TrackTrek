@@ -46,21 +46,25 @@ public class TrainController : MonoBehaviour {
                 heading = transform.position + transform.right;
                gameObject.GetComponent<SpriteRenderer>().sprite = eastWest;
                 gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                gameObject.GetComponent<SpriteRenderer>().flipY = false;
                 break;
             case TravelDir.West:
                 heading = transform.position - transform.right;
                 gameObject.GetComponent<SpriteRenderer>().sprite = eastWest;
                 gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                gameObject.GetComponent<SpriteRenderer>().flipY = false;
                 break;
             case TravelDir.North:
                 heading = transform.position + transform.up;
                 gameObject.GetComponent<SpriteRenderer>().sprite = northSouth;
+                gameObject.GetComponent<SpriteRenderer>().flipX = false;
                 gameObject.GetComponent<SpriteRenderer>().flipY = false;
                 break;
             case TravelDir.South:
                 heading = transform.position - transform.up;
                 gameObject.GetComponent<SpriteRenderer>().sprite = northSouth;
                 gameObject.GetComponent<SpriteRenderer>().flipY = true;
+                gameObject.GetComponent<SpriteRenderer>().flipX = false;
                 break;
         }
         

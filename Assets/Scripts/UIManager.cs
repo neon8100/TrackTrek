@@ -36,9 +36,6 @@ public class UIManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        print("show pause panel is "+showPausePanel);
-
-
 
         if (showTitlePanel)
         {
