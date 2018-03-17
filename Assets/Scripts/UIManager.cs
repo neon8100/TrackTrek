@@ -37,9 +37,13 @@ public class UIManager : MonoBehaviour {
     [SerializeField]
     private Selectable gameOverSelectable;
 
+    private void Awake()
+    {
+        GameEvents.Initialise();
+    }
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         GameEvents.events.onGameStart += ShowTitlePanel;
         GameEvents.events.onGameOver += ShowGameOverPanel;
         GameEvents.events.onGameOver += ShowYouLosePanel;
@@ -47,7 +51,7 @@ public class UIManager : MonoBehaviour {
         GameEvents.events.onGameRestart += ShowTitlePanel;
         GameEvents.events.onGameRestart += HideYouWinLosePanel;
 
-        startSelectable.Select();
+        //startSelectable.Select();
 	}
 
 	public void ShowPauseGameMenu(){
@@ -119,19 +123,16 @@ public class UIManager : MonoBehaviour {
     public void RunStartGameEvent(){
         gameManager.LoadLevelScene();
         GameEvents.events.onGameStart();
-        print("Start Game");
     }
 
     public void RunPauseGameEvents()
     {
         GameEvents.events.onGamePause();
-        print("Pause Game");
     }
 
     public void RunGameOverEvents()
     {
         GameEvents.events.onGameOver();
-        print("Game Over");
     }
 
     public void ReturnToTitle(){
@@ -141,7 +142,6 @@ public class UIManager : MonoBehaviour {
 
     public void RunQuitGame()
     {
-        print("Quit");
         gameManager.QuitGame();
     }
 

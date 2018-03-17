@@ -2,15 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-[System.Serializable]
-public class AudioAsset
-{
-    public AudioClipTypes audioClipType;
-    //SFX for this object
-    public AudioClip audioClip;
-}
-
 [CreateAssetMenu(menuName = "Audio/Audio Assets")]
 public class AudioAssets : ScriptableObject
 {

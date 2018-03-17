@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: BaseEnvironmentTiles
+  m_Name: Base Environment Tiles
   m_EditorClassIdentifier: Assembly-CSharp::TileAssets
   tileAssets:
   - tileType: 0

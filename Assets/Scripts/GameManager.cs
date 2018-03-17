@@ -30,9 +30,10 @@ public class GameManager : MonoBehaviour {
         GameEvents.events.onGamePause += SetTimeScale;
         GameEvents.events.onGameRestart += UnloadLevelScene;
 
-
+        /*
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        */
 	}
 	
 	// Update is called once per frame
