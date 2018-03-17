@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4846436243880296}
   - component: {fileID: 212849705428055894}
-  - component: {fileID: 114145198465881818}
   - component: {fileID: 61044685648014512}
   - component: {fileID: 50530642934082766}
+  - component: {fileID: 114770276636549226}
   m_Layer: 0
   m_Name: TrainCar
   m_TagString: Untagged
@@ -88,7 +88,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
---- !u!114 &114145198465881818
+--- !u!114 &114770276636549226
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1928851344045980}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36d523d2db5469142b50a2e8f1d4231a, type: 3}
+  m_Script: {fileID: 11500000, guid: d183bd24150e14bd5ae7af73497c76b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.0035

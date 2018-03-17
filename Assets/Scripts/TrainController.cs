@@ -102,12 +102,14 @@ public class TrainController : MonoBehaviour {
         GameObject explo = Instantiate(explosionPrefab);
         explo.transform.position = transform.position;
 
-        Destroy(gameObject);
+        GameEvents.events.onGameLose();
 
         if (isEngine)
         {
-            GameEvents.events.onGameLose();
+            GameEvents.events.onGameOver();
         }
+
+        Destroy(gameObject);
     }
 
 
