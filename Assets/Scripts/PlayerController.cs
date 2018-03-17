@@ -20,10 +20,14 @@ public class PlayerController : MonoBehaviour {
 
     public Transform lookPointer;
 
+    public GameObject sprite;
+
     private void Awake()
     {
 
         playerId = (int)playerNumber + 1;
+
+        lookPointer.gameObject.SetActive(false);
 
         foreach (string s in Input.GetJoystickNames())
         {
@@ -39,6 +43,9 @@ public class PlayerController : MonoBehaviour {
 
     }
 
+    float x = 0;
+    float y = 0;
+
     private void FixedUpdate()
     {
         
@@ -52,9 +59,11 @@ public class PlayerController : MonoBehaviour {
         float angle = (Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg) - 90;
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
 
+
         if (Mathf.Abs(vertical) >= 0.5 || Mathf.Abs(horizontal) >= 0.5f)
         {
             transform.rotation = q;
+            sprite.transform.localRotation = Quaternion.Inverse(transform.rotation);
         }
 
         transform.position = Vector3.Lerp(transform.position, newPos, Time.deltaTime);
@@ -76,6 +85,42 @@ public class PlayerController : MonoBehaviour {
         else if (rightBumper)
         {
             SwapTrackGhost(1);
+        }
+
+        if (lookPointer.gameObject.activeInHierarchy)
+        {
+           
+            if (vertical > 0.5f)
+            {
+                y = 1;
+                x = 0;
+                x = Mathf.Round(transform.position.x) + x;
+                y = Mathf.Round(transform.position.y) + y;
+
+            }
+            else if(vertical < -0.5f)
+            {
+                y = -1;
+                x = 0;
+                x = Mathf.Round(transform.position.x) + x;
+                y = Mathf.Round(transform.position.y) + y;
+            }
+            else if(horizontal > 0.5f)
+            {
+                x = 1;
+                y = 0;
+                x = Mathf.Round(transform.position.x) + x;
+                y = Mathf.Round(transform.position.y) + y;
+            }
+            else if (horizontal < -0.5f)
+            {
+                x = -1;
+                y = 0;
+                x = Mathf.Round(transform.position.x) + x;
+                y = Mathf.Round(transform.position.y) + y;
+            }
+
+            lookPointer.position = new Vector3(x, y, 0);
         }
     }
 
@@ -183,6 +228,7 @@ public class PlayerController : MonoBehaviour {
 
     void CreateTrackGhost()
     {
+        lookPointer.gameObject.SetActive(true);
         trackGhost = Instantiate(trackAssets.trackTypes[trackIndex]);
         trackGhost.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.25f);
         trackGhost.GetComponent<TrackPiece>().boxCollider.enabled = false;
@@ -219,5 +265,7 @@ public class PlayerController : MonoBehaviour {
         holdingMaterial = false;
 
         GameEvents.events.onLayTrack();
+
+        lookPointer.gameObject.SetActive(false);
     }
 }
