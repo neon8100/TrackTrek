@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61309179107207222}
   m_Layer: 0
   m_Name: track_start
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,6 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28320535033a2948bfed4b03f73de9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUnbuildable: 0
   boxCollider: {fileID: 0}
   connections:
   - from: 1

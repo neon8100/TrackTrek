@@ -11,6 +11,10 @@ public class TrackConnection
 
 public class TrackPiece : MonoBehaviour
 {
+
+
+    public bool isUnbuildable;
+
     public BoxCollider2D boxCollider;
 
     private void Awake()
