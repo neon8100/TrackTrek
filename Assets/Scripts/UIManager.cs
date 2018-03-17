@@ -23,13 +23,20 @@ public class UIManager : MonoBehaviour {
     private GameObject pausePanel;
     [SerializeField]
     private GameObject gameOverPanel;
+    [SerializeField]
+    private GameObject youWinPanel;
+    [SerializeField]
+    private GameObject youLosePanel;
    
 
 	// Use this for initialization
 	void Start () {
         GameEvents.events.onGameStart += ShowTitlePanel;
         GameEvents.events.onGameOver += ShowGameOverPanel;
+        GameEvents.events.onGameOver += ShowYouLosePanel;
         GameEvents.events.onGamePause += ShowPauseGameMenu;
+        GameEvents.events.onGameRestart += ShowTitlePanel;
+        GameEvents.events.onGameRestart += HideYouWinLosePanel;
 
         GameObject.FindGameObjectWithTag("GameManager");
 	}
@@ -81,12 +88,12 @@ public class UIManager : MonoBehaviour {
             gameOverPanel.SetActive(true);
             pausePanel.SetActive(false);
             titleMenuPanel.SetActive(false);
-            logoPanel.SetActive(true);
+            youLosePanel.SetActive(true);
         } else if (gameOverPanel.activeInHierarchy){
             gameOverPanel.SetActive(false);
             pausePanel.SetActive(false);
             titleMenuPanel.SetActive(false);
-            logoPanel.SetActive(false);
+            youLosePanel.SetActive(false);
         }
     }
 
@@ -108,7 +115,22 @@ public class UIManager : MonoBehaviour {
         }
     }
 
+    private void ShowYouWinPanel(){
+        youWinPanel.SetActive(true);
+    }
+
+    private void ShowYouLosePanel()
+    {
+        youLosePanel.SetActive(true);
+    }
+
+    private void HideYouWinLosePanel(){
+        youLosePanel.SetActive(false);
+        youWinPanel.SetActive(false);
+    }
+
     public void RunStartGameEvent(){
+        gameManager.LoadLevelScene();
         GameEvents.events.onGameStart();
         print("Start Game");
     }
@@ -122,7 +144,11 @@ public class UIManager : MonoBehaviour {
     public void RunGameOverEvents()
     {
         GameEvents.events.onGameOver();
-        print("Restart Game/Game Over");
+        print("Game Over");
+    }
+
+    public void ReturnToTitle(){
+        GameEvents.events.onGameRestart();
     }
 
     public void RunQuitGame()
@@ -136,6 +162,7 @@ public class UIManager : MonoBehaviour {
         GameEvents.events.onGameStart -= ShowTitlePanel;
         GameEvents.events.onGamePause -= ShowPauseGameMenu;
         GameEvents.events.onGameOver -= ShowGameOverPanel;
+        GameEvents.events.onGameRestart -= ShowTitlePanel;
 	}
 
 }

@@ -38,10 +38,13 @@ public class AudioManager : MonoBehaviour {
         GameEvents.events.onLayTrack += PlayLayTrack;
         GameEvents.events.onUIOpenTrackSelect += PlayOnUITrackTypeSelect;
         GameEvents.events.onGamePause += PlayOnUITrackTypeSelect;
+        GameEvents.events.onGameStart += PlayMusic;
+        GameEvents.events.onGameRestart += StopMusic;
+
 
         //The game will start playing the ambience and music at the start and loop until you quit
         PlayAmbient();
-        PlayMusic();
+
 	}
 	
     private void PlayAmbient(){
@@ -54,6 +57,12 @@ public class AudioManager : MonoBehaviour {
         musicAudioSource.clip = audioAssets.GetAudioClip(AudioClipTypes.Music);
         musicAudioSource.Play();
         musicAudioSource.loop = true;
+    }
+
+    private void StopMusic()
+    {
+        musicAudioSource.clip = audioAssets.GetAudioClip(AudioClipTypes.Music);
+        musicAudioSource.Stop();
     }
 
     private void PlayPickupResource(){
@@ -139,6 +148,7 @@ public class AudioManager : MonoBehaviour {
         GameEvents.events.onResourceCreated -= PlayGenerateResource;
         GameEvents.events.onLayTrack -= PlayLayTrack;
         GameEvents.events.onUIOpenTrackSelect -= PlayOnUITrackTypeSelect;
+        GameEvents.events.onGameStart += PlayMusic;
     }
 
 }

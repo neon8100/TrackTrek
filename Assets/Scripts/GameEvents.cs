@@ -20,6 +20,7 @@ public class GameEvents
     public delegate void OnGamePause();
     public delegate void OnGameWin();
     public delegate void OnGameLose();
+    public delegate void OnGameRestart();
 
     public delegate void OnPickupResource();
     public delegate void OnDropResource();
@@ -40,6 +41,7 @@ public class GameEvents
     public OnGamePause onGamePause;
     public OnGameWin onGameWin;
     public OnGameLose onGameLose;
+    public OnGameRestart onGameRestart;
 
     public OnPickupResource onPickupResource;
     public OnDropResource onDropResource;
