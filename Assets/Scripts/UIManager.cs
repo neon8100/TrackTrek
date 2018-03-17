@@ -78,8 +78,6 @@ public class UIManager : MonoBehaviour {
 
         pausePanel.SetActive(showPausePanel);
         logoPanel.SetActive(showPausePanel);
-        
-        pausePanel.gameObject.SetActive(true);
     }
 
     private void ShowGameOverPanel()
