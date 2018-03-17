@@ -30,6 +30,7 @@ public class UIManager : MonoBehaviour {
         GameEvents.events.onGameStart += ShowTitlePanel;
         GameEvents.events.onGameOver += ShowGameOverPanel;
         GameEvents.events.onGamePause += ShowPauseGameMenu;
+        GameEvents.events.onGameRestart += ShowTitlePanel;
 
         GameObject.FindGameObjectWithTag("GameManager");
 	}
@@ -109,6 +110,7 @@ public class UIManager : MonoBehaviour {
     }
 
     public void RunStartGameEvent(){
+        gameManager.LoadLevelScene();
         GameEvents.events.onGameStart();
         print("Start Game");
     }
@@ -122,7 +124,11 @@ public class UIManager : MonoBehaviour {
     public void RunGameOverEvents()
     {
         GameEvents.events.onGameOver();
-        print("Restart Game/Game Over");
+        print("Game Over");
+    }
+
+    public void ReturnToTitle(){
+        GameEvents.events.onGameRestart();
     }
 
     public void RunQuitGame()

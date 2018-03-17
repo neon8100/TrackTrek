@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
+    public GameObject gameSceneCamera;
+
     private bool isGamePaused;
     private bool shouldGameBePaused;
 
@@ -15,7 +17,7 @@ public class GameManager : MonoBehaviour {
 	private void Awake()
 	{
         GameEvents.Initialise();
-        LoadUIManagerScene();
+
 
         if(gameObject.tag != "GameManager"){
             gameObject.tag = "GameManager";
@@ -26,10 +28,17 @@ public class GameManager : MonoBehaviour {
 	void Start () {
         //GameEvents.events.onGamePause += PauseGame;
         //GameEvents.events.onGamePause += SetTimeScale;
+        GameEvents.events.onGameRestart += UnloadLevelScene;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (SceneManager.GetSceneByName("Level").isLoaded){
+            gameSceneCamera.SetActive(false);
+        } else if (!SceneManager.GetSceneByName("Level").isLoaded){
+            gameSceneCamera.SetActive(true);
+        }
 
         if (CrossPlatformInputManager.GetButtonDown("Jump"))
         {
@@ -60,12 +69,19 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    private void LoadUIManagerScene(){
-        if (!SceneManager.GetSceneByName("UIScene").isLoaded)
+    public void LoadLevelScene(){
+        if (!SceneManager.GetSceneByName("Level").isLoaded)
         {
-            SceneManager.LoadScene("UIScene", LoadSceneMode.Additive);
+            SceneManager.LoadScene("Level", LoadSceneMode.Additive);
         }
     }
+
+    public void UnloadLevelScene()
+    {
+        SceneManager.UnloadSceneAsync(1);
+    }
+
+
 
 	private void OnDestroy()
 	{
