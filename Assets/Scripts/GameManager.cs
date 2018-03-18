@@ -74,20 +74,19 @@ public class GameManager : MonoBehaviour {
     public void SetTimeScale(){
         if (!isGamePaused)
         {
-            if (Time.timeScale == 1f)
-            {
-                Time.timeScale = 0f;
-            }
-            
             isGamePaused = true;
         }
         else
         {
-            if (Time.timeScale == 0f)
-            {
-                Time.timeScale = 1f;
-            }
             isGamePaused = false;
+        }
+
+        if (Time.timeScale == 1f)
+        {
+            Time.timeScale = 0f;
+        } else if(Time.timeScale == 0f)
+        {
+            Time.timeScale = 1f;
         }
     }
 
