@@ -26,9 +26,10 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //GameEvents.events.onGamePause += PauseGame;
+        GameEvents.events.onGameWin += SetTimeScale;
         GameEvents.events.onGamePause += SetTimeScale;
         GameEvents.events.onGameRestart += UnloadLevelScene;
+        GameEvents.events.onGameRestart += ResetTimeScale;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -47,27 +48,45 @@ public class GameManager : MonoBehaviour {
         {
             GameEvents.events.onGamePause();
             //SetTimeScale();
-        } 
-	}
+        }
+        if (CrossPlatformInputManager.GetButtonDown("Fire1"))
+        {
+            GameEvents.events.onGameWin();
+            //SetTimeScale();
+        }
+    }
 
 	public void StartGame(){
         GameEvents.events.onGameStart();
     }
 
     public void ResetGame(){
+        Time.timeScale = 1;
         GameEvents.events.onGameStart();
+    }
+
+    public void ResetTimeScale()
+    {
+        Time.timeScale = 1;
     }
 
 
     public void SetTimeScale(){
         if (!isGamePaused)
         {
-            Time.timeScale = 0f;
+            if (Time.timeScale == 1f)
+            {
+                Time.timeScale = 0f;
+            }
+            
             isGamePaused = true;
         }
         else
         {
-            Time.timeScale = 1f;
+            if (Time.timeScale == 0f)
+            {
+                Time.timeScale = 1f;
+            }
             isGamePaused = false;
         }
     }

@@ -86,8 +86,8 @@ public class LevelGenerator : MonoBehaviour {
             }
         }
 
-        player1.transform.position = new Vector3(levelLayout.mapSize.x/ 2, -levelLayout.mapSize.y / 2);
-        player2.transform.position = player1.transform.position + new Vector3(2, 2, 0);
+        player1.transform.position = new Vector3(8, -15);
+        player2.transform.position = player1.transform.position + new Vector3(2, 1, 0);
 
     }
 

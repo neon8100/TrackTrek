@@ -47,6 +47,8 @@ public class UIManager : MonoBehaviour {
         GameEvents.events.onGameStart += ShowTitlePanel;
         GameEvents.events.onGameOver += ShowGameOverPanel;
         GameEvents.events.onGameOver += ShowYouLosePanel;
+        GameEvents.events.onGameWin += ShowYouWinPanel;
+        GameEvents.events.onGameWin += ShowGameOverPanel;
         GameEvents.events.onGamePause += ShowPauseGameMenu;
         GameEvents.events.onGameRestart += ShowTitlePanel;
         GameEvents.events.onGameRestart += HideYouWinLosePanel;
@@ -76,7 +78,7 @@ public class UIManager : MonoBehaviour {
             gameOverPanel.SetActive(true);
             pausePanel.SetActive(false);
             titleMenuPanel.SetActive(false);
-            youLosePanel.SetActive(true);
+            
             gameOverSelectable.Select();
         } else if (gameOverPanel.activeInHierarchy){
             gameOverPanel.SetActive(false);
@@ -136,7 +138,7 @@ public class UIManager : MonoBehaviour {
     }
 
     public void ReturnToTitle(){
-        GameEvents.events.onGamePause();
+        //GameEvents.events.onGamePause();
         GameEvents.events.onGameRestart();
     }
 
@@ -151,6 +153,10 @@ public class UIManager : MonoBehaviour {
         GameEvents.events.onGamePause -= ShowPauseGameMenu;
         GameEvents.events.onGameOver -= ShowGameOverPanel;
         GameEvents.events.onGameRestart -= ShowTitlePanel;
-	}
+        GameEvents.events.onGameWin -= ShowYouWinPanel;
+        GameEvents.events.onGameWin -= ShowGameOverPanel;
+        GameEvents.events.onGameOver -= ShowYouLosePanel;
+        GameEvents.events.onGameRestart -= HideYouWinLosePanel;
+    }
 
 }

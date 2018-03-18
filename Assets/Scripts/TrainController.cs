@@ -37,7 +37,7 @@ public class TrainController : MonoBehaviour {
 
     private void Start()
     {
-        GameEvents.Initialise();
+        //GameEvents.Initialise();
 
         gameOverTime = maxTime;
 
