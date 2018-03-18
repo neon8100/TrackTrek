@@ -8,9 +8,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Base Environment Tiles
-  m_EditorClassIdentifier: Assembly-CSharp::TileAssets
+  m_Script: {fileID: 11500000, guid: 906a7ae53e351b84da92e071e1cc5c19, type: 3}
+  m_Name: New Tile Asset Collection
+  m_EditorClassIdentifier: 
   tileAssets:
   - tileType: 0
     tile: {fileID: 1062474517933184, guid: 26e3e127658217d4ba6cee8e1a56073d, type: 2}

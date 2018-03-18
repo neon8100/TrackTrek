@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Level/TileLayout")]
 public class TileLayoutAsset : ScriptableObject
 {
-    public TileAssets tileAssetGroup;
+    public TileAssetCollection tileAssetGroup;
     public Vector2 mapSize;
     [HideInInspector()]
     public TileTypes[] tiles;
