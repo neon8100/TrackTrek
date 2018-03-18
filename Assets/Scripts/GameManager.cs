@@ -49,11 +49,12 @@ public class GameManager : MonoBehaviour {
             GameEvents.events.onGamePause();
             //SetTimeScale();
         }
+        /*
         if (CrossPlatformInputManager.GetButtonDown("Fire1"))
         {
             GameEvents.events.onGameWin();
             //SetTimeScale();
-        }
+        }*/
     }
 
 	public void StartGame(){
